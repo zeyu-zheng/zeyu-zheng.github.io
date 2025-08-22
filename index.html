@@ -31,7 +31,7 @@
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 24px 20px;
+            padding: 12px 20px;
         }
         
         .page-header {
@@ -39,12 +39,12 @@
             font-size: 2.8em;
             font-weight: 300;
             color: #000;
-            margin: 16px 0 24px;
+            margin: 8px 0 16px;
             letter-spacing: -0.5px;
         }
         
         .quote-container {
-            margin: 16px auto 28px;
+            margin: 8px auto 18px;
             max-width: 700px;
         }
         
@@ -139,21 +139,16 @@
             color: #666;
         }
         .list--numbered {
-            counter-reset: item-counter;
+            list-style: decimal;
+            padding-left: 24px;
         }
         .list--numbered .list-item {
-            counter-increment: item-counter;
-            margin-bottom: 18px;
-            padding-left: 32px;
-            position: relative;
+            margin-bottom: 16px;
+            padding-left: 0;
+            position: static;
         }
         .list--numbered .list-item::before {
-            content: counter(item-counter) ".";
-            position: absolute;
-            left: 0;
-            top: 2px;
-            font-weight: 500;
-            color: #666;
+            content: none;
         }
         .item-title a {
             color: #000;
@@ -262,7 +257,7 @@
         </div>
         
         <h2>Research Works</h2>
-        <ol class="list list--numbered">
+        <ol class="list list--numbered" reversed>
             <li class="list-item">
                 <div class="item-title">
                     <a href="https://arxiv.org/abs/2505.07706" target="_blank">The generalized trifference problem</a>
