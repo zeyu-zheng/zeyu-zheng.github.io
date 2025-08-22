@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>郑泽宇的主页 | Zeyu Zheng's Homepage</title>
+    
+    <meta name="description" content="Zeyu Zheng's homepage">
+    <meta name="author" content="Zeyu Zheng">
+    <meta name="keywords" content="Zeyu Zheng; 郑泽宇; CMU">
+    
+    <!-- Custom Styles -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+            color: #222;
+            background: #fff;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 24px 20px;
+        }
+        
+        .page-header {
+            text-align: center;
+            font-size: 2.8em;
+            font-weight: 300;
+            color: #000;
+            margin: 16px 0 24px;
+            letter-spacing: -0.5px;
+        }
+        
+        .quote-container {
+            margin: 30px auto 50px;
+            max-width: 700px;
+        }
+        
+        .quote-text {
+            font-style: italic;
+            font-size: 1.15em;
+            color: #555;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        
+        .quote-author {
+            text-align: right;
+            color: #777;
+            font-size: 0.95em;
+        }
+        
+        .profile-section {
+            margin-bottom: 60px;
+        }
+        .row {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+        .col-md-5 {
+            flex: 0 0 38%;
+        }
+        .col-md-7 {
+            flex: 1 1 auto;
+        }
+        
+        .profile-image {
+            width: 100%;
+            max-width: 380px;
+            display: block;
+        }
+        
+        .bio-text p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            text-align: justify;
+        }
+        
+        .social-links {
+            margin-top: 25px;
+            display: flex;
+            gap: 25px;
+        }
+        
+        .social-links a {
+            color: #444;
+            transition: color 0.2s ease;
+        }
+        
+        .social-links a:hover {
+            color: #000;
+        }
+        
+        .social-links svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+        
+        h2 {
+            font-size: 1.7em;
+            font-weight: 400;
+            color: #000;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        /* Unified list styles: numbered and unnumbered */
+        .list {
+            list-style: none;
+            padding-left: 0;
+            margin-left: 0;
+        }
+        .list .list-item {
+            margin-bottom: 18px;
+        }
+        .list:not(.list--numbered) .list-item {
+            padding: 8px 0 8px 20px;
+            position: relative;
+        }
+        .list:not(.list--numbered) .list-item::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #666;
+        }
+        .list--numbered {
+            counter-reset: item-counter;
+        }
+        .list--numbered .list-item {
+            counter-increment: item-counter;
+            margin-bottom: 25px;
+            padding-left: 35px;
+            position: relative;
+        }
+        .list--numbered .list-item::before {
+            content: counter(item-counter) ".";
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-weight: 500;
+            color: #666;
+        }
+        .item-title a {
+            color: #000;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        .item-title a:hover {
+            color: #333;
+            text-decoration: underline;
+        }
+        .item-meta {
+            color: #666;
+            font-size: 0.95em;
+            margin: 5px 0 3px;
+        }
+        .item-venue {
+            color: #444;
+            font-size: 0.95em;
+            font-style: italic;
+        }
+        .item-venue a {
+            color: #444;
+            text-decoration: none;
+        }
+        .item-venue a:hover {
+            text-decoration: underline;
+        }
+        .list a {
+            color: #333;
+            text-decoration: underline;
+        }
+        .list a:hover {
+            color: #000;
+        }
+        .list strong {
+            font-weight: 500;
+            color: #000;
+            margin-right: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 15px;
+            }
+            
+            .page-header {
+                font-size: 2.2em;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+            
+            .row {
+                flex-direction: column;
+            }
+            .profile-image {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="page-header">郑泽宇 | Zeyu Zheng</h1>
+        
+        <div class="quote-container">
+            <div class="quote-text">What you need is that your brain is open.</div>
+            <div class="quote-author">—— Erdős Pál</div>
+        </div>
+        
+        <div class="profile-section">
+            <div class="row">
+                <div class="col-md-5">
+                    <img class="profile-image" src="TalkPhoto.jpg" alt="Zeyu Zheng's Photo">
+                </div>
+                <div class="col-md-7">
+                    <div class="bio-text">
+                        <p>Hi! I am a Ph.D. candidate at Carnegie Mellon University in the CS & Math joint program.</p>
+                        <p>Previously, I received a B.S. Computational Math from Fudan University, and a B.A. Mathematics with a minor in Computer Science from Rutgers University, both in 2023. I also spent two wonderful semesters at Budapest Semesters in Mathematics in the spring and summer of 2022.</p>
+                        <p>My Erdős number is 2.</p>
+                        
+                        <div class="social-links">
+                            <a href="mailto:zeyuzhen@andrew.cmu.edu" title="Email">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                </svg>
+                            </a>
+                            <a href="https://github.com/zeyu-zheng" target="_blank" title="GitHub">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                            <a href="https://scholar.google.com/citations?user=3vCGxjcAAAAJ&hl=en" target="_blank" title="Google Scholar">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <h2>Research Works</h2>
+        <ol class="list list--numbered">
+            <li class="list-item">
+                <div class="item-title">
+                    <a href="https://arxiv.org/abs/2505.07706" target="_blank">The generalized trifference problem</a>
+                </div>
+                <div class="item-meta">Anurag Bishnoi, Bartłomiej Kielak, Benedek Kovács, Zoltán Lóránt Nagy, Gábor Somlai, Máté Vizer, Zeyu Zheng</div>
+                <div class="item-venue">Under review</div>
+            </li>
+            
+            <li class="list-item">
+                <div class="item-title">
+                    <a href="https://arxiv.org/abs/2502.05438" target="_blank">On the number of edges in saturated partial embeddings of maximal planar graphs</a>
+                </div>
+                <div class="item-meta">János Barát, Zoltán L. Blázsik, Balázs Keszegh, Zeyu Zheng</div>
+                <div class="item-venue">Under review</div>
+            </li>
+            
+            <li class="list-item">
+                <div class="item-title">
+                    <a href="https://arxiv.org/abs/2307.07711" target="_blank">Sandpile prediction on undirected graphs</a>
+                </div>
+                <div class="item-meta">Ruinian Chang, Jingbang Chen, Ian Munro, Richard Peng, Qingyu Shi, Zeyu Zheng</div>
+                <div class="item-venue">Under review</div>
+            </li>
+            
+            <li class="list-item">
+                <div class="item-title">
+                    <a href="https://arxiv.org/abs/2208.13477" target="_blank">Extremal planar graphs with no cycles of particular lengths</a>
+                </div>
+                <div class="item-meta">Ervin Győri, Xianzhi Wang, Zeyu Zheng</div>
+                <div class="item-venue">Under review</div>
+            </li>
+            
+            <li class="list-item">
+                <div class="item-title">
+                    <a href="https://egres.elte.hu/www/tr-22-13.html" target="_blank">Four-regular graphs with extremal rigidity properties</a>
+                </div>
+                <div class="item-meta">Tibor Jordán, Robin Huang, Henry Simmons, Kaylee Weatherspoon, Zeyu Zheng</div>
+                <div class="item-venue">
+                    <a href="https://www.sciencedirect.com/science/article/pii/S0012365X23005198" target="_blank">Discrete Mathematics 347 (2024), no. 4, 113833.</a>
+                </div>
+            </li>
+            
+            <li class="list-item">
+                <div class="item-title">
+                    <a href="https://arxiv.org/abs/2206.04154" target="_blank">Common kings of a chain of cycles in a strong tournament</a>
+                </div>
+                <div class="item-meta">Logan Post, Zeyu Zheng</div>
+                <div class="item-venue">
+                    <a href="https://link.springer.com/article/10.1007/s00373-023-02665-5" target="_blank">Graphs and Combinatorics 39 (2023), no. 4, 71.</a>
+                </div>
+            </li>
+            
+            <li class="list-item">
+                <div class="item-title">
+                    <a href="https://arxiv.org/abs/2109.10520" target="_blank">On the Turán number of the linear 3-graph C13</a>
+                </div>
+                <div class="item-meta">Chaoliang Tang, Hehui Wu, Shengtong Zhang, Zeyu Zheng</div>
+                <div class="item-venue">
+                    <a href="https://www.combinatorics.org/ojs/index.php/eljc/article/view/v29i3p46" target="_blank">The Electronic Journal of Combinatorics (2022), P3–46.</a>
+                </div>
+            </li>
+        </ol>
+        
+        <h2>Teaching</h2>
+        <ul class="list">
+            <li class="list-item">Fall 2025: TA for Multivariate Analysis at CMU</li>
+            <li class="list-item">Spring 2025: TA for Multivariate Analysis at CMU</li>
+            <li class="list-item">Fall 2024: TA for Combinatorics at CMU, TA for <a href="https://www.math.cmu.edu/~ploh/2024-putnam.shtml" target="_blank">Putnam Seminar</a> at CMU</li>
+            <li class="list-item">Spring 2024: TA for Combinatorics at CMU</li>
+            <li class="list-item">Fall 2023: TA for <a href="https://www.math.cmu.edu/~ploh/2023-putnam.shtml" target="_blank">Putnam Seminar</a> at CMU</li>
+            <li class="list-item">Fall 2021: TA for Linear Algebra at Fudan University</li>
+        </ul>
+        
+        <h2>Miscellaneous</h2>
+        <ul class="list">
+            <li class="list-item"><strong>Bartending:</strong> My favorite cocktails are Baileys Milkshake, Gin Tonic and Pina Colada.</li>
+            <li class="list-item"><strong>Basketball:</strong> I was on the school basketball team during middle school and high school. Our 1908 class team won the second place in 2018 Shanghai High School SBS. Our high school team won the first prize in Xuhui District in 2018 High School Basketball League Shanghai. My favorite basketball players are Kobe Bryant and Manu Ginóbili.</li>
+            <li class="list-item"><strong>Cooking:</strong> Let him cook!</li>
+            <li class="list-item"><strong>MC:</strong> I work as a Master of Ceremonies. I was a member of Fudan Host Team. I hosted RU Voice 2022 and CMU CSSA The Voice 2024.</li>
+        </ul>
+    </div>
+</body>
+</html>
