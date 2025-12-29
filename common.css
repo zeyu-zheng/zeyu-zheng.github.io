@@ -18,9 +18,9 @@ body {
 .menu-toggle {
     display: none;
     position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
+    top: calc(20px + env(safe-area-inset-top, 0px));
+    right: calc(20px + env(safe-area-inset-right, 0px));
+    z-index: 1002;
     background: transparent;
     border: none;
     padding: 10px;
@@ -34,24 +34,6 @@ body {
     background: #333;
     margin: 5px 0;
     transition: 0.3s;
-}
-
-/* Sidebar overlay */
-.sidebar-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    z-index: 999;
-}
-
-.sidebar-overlay.active {
-    display: block;
 }
 
 /* Sidebar navigation */
@@ -143,20 +125,19 @@ h2 {
     .sidebar {
         position: fixed;
         top: 0;
-        bottom: 0;
         right: -100%;
         width: 50%;
         max-width: 200px;
-        background: transparent;
-        box-shadow: none;
+        height: var(--app-height, 100vh);
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: -2px 0 10px rgba(0,0,0,0.1);
         transform: none;
         transition: right 0.3s ease;
         padding: 0;
         overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 1000;
+        z-index: 1001;
     }
     
     .sidebar.active {
@@ -166,11 +147,12 @@ h2 {
     .sidebar-nav {
         gap: 20px;
         width: 100%;
-        padding: 20px;
-        max-height: 100%;
+        height: 100%;
+        padding: calc(20px + env(safe-area-inset-top, 0px)) 20px calc(20px + env(safe-area-inset-bottom, 0px));
         overflow-y: auto;
         box-sizing: border-box;
         -webkit-overflow-scrolling: touch;
+        justify-content: center;
     }
     
     .sidebar-nav a {
