@@ -26,6 +26,46 @@
             line-height: 1.65;
             color: #222;
             background: #fff;
+            position: relative;
+        }
+        
+        .sidebar {
+            position: fixed;
+            top: 50%;
+            right: 30px;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+        
+        .sidebar-nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .sidebar-nav li {
+            width: 100%;
+        }
+        
+        .sidebar-nav a {
+            color: #444;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            text-align: center;
+            display: block;
+            padding: 8px 16px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+        }
+        
+        .sidebar-nav a:hover {
+            color: #000;
+            background-color: #f5f5f5;
+            transform: translateX(-4px);
         }
         
         .container {
@@ -209,13 +249,28 @@
             .profile-image {
                 margin-bottom: 20px;
             }
+            
+            .sidebar {
+                display: none;
+            }
+            
         }
     </style>
 </head>
 
 <body>
+    <nav class="sidebar">
+        <ul class="sidebar-nav">
+            <li><a href="#about">About</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="#research">Research</a></li>
+            <li><a href="#teaching">Teaching</a></li>
+            <li><a href="#miscellaneous">Misc</a></li>
+        </ul>
+    </nav>
+    
     <div class="container">
-        <h1 class="page-header">郑泽宇 | Zeyu Zheng</h1>
+        <h1 class="page-header" id="about">郑泽宇 | Zeyu Zheng</h1>
         
         <div class="quote-container">
             <div class="quote-text">What you need is that your brain is open.</div>
@@ -233,7 +288,6 @@
                         <p>Alongside my Ph.D. study, I have gained valuable industry experience at <a href="https://seed.bytedance.com/en/" target="_blank">ByteDance Seed</a> as a research scientist intern.</p>
                         <p>Previously, I received a B.S. Computational Math from Fudan University, and a B.A. Mathematics with a minor in Computer Science from Rutgers University, both in 2023. I also spent two wonderful semesters at Budapest Semesters in Mathematics in the spring and summer of 2022.</p>
                         <p>My Erdős number is 2.</p>
-                        <a href="researchStatement.pdf" target="_blank">Research Statement</a>
                         
                         <div class="social-links">
                             <a href="mailto:zeyuzhen@andrew.cmu.edu" title="Email">
@@ -251,13 +305,23 @@
                                     <path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/>
                                 </svg>
                             </a>
+                            <a href="https://www.linkedin.com/in/zeyu-zheng-026b40244/" target="_blank" title="LinkedIn">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </a>
+                            <a href="https://x.com/regunivers" target="_blank" title="X (Twitter)">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                                </svg>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         
-        <h2>Research Works</h2>
+        <h2 id="research">Research Works</h2>
         <ol class="list list--numbered" reversed>
             <li class="list-item">
                 <div class="item-title">
@@ -354,7 +418,7 @@
             </li>
         </ol>
         
-        <h2>Teaching</h2>
+        <h2 id="teaching">Teaching</h2>
         <ul class="list">
             <li class="list-item">Fall 2025: TA for Multivariate Analysis at CMU</li>
             <li class="list-item">Spring 2025: TA for Multivariate Analysis at CMU</li>
@@ -364,7 +428,7 @@
             <li class="list-item">Fall 2021: TA for Linear Algebra at Fudan University</li>
         </ul>
         
-        <h2>Miscellaneous</h2>
+        <h2 id="miscellaneous">Miscellaneous</h2>
         <ul class="list">
             <li class="list-item"><strong>Bartending:</strong> My favorite cocktails are Baileys Milkshake, Gin Tonic and Pina Colada.</li>
             <li class="list-item"><strong>Basketball:</strong> I was on the school basketball team during middle school and high school. Our 1908 class team won the second place in 2018 Shanghai High School SBS. Our high school team won the first prize in Xuhui District in 2018 High School Basketball League Shanghai. My favorite basketball players are Kobe Bryant and Manu Ginóbili.</li>

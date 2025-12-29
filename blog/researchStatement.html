@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="favicon.ico">
+    
+    <title>Research Statement | 郑泽宇的主页 | Zeyu Zheng's Homepage</title>
+    
+    <meta name="description" content="Zeyu Zheng's Research Statement">
+    <meta name="author" content="Zeyu Zheng">
+    <meta name="keywords" content="Zeyu Zheng; 郑泽宇; CMU; Research Statement">
+    
+    <!-- Custom Styles -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+            font-size: 17px;
+            line-height: 1.65;
+            color: #222;
+            background: #fff;
+            position: relative;
+        }
+        
+        .sidebar {
+            position: fixed;
+            top: 50%;
+            right: 30px;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+        
+        .sidebar-nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .sidebar-nav li {
+            width: 100%;
+        }
+        
+        .sidebar-nav a {
+            color: #444;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            text-align: center;
+            display: block;
+            padding: 8px 16px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+        }
+        
+        .sidebar-nav a:hover {
+            color: #000;
+            background-color: #f5f5f5;
+            transform: translateX(-4px);
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 12px 20px;
+        }
+        
+        .page-header {
+            text-align: center;
+            font-size: 2.8em;
+            font-weight: 300;
+            color: #000;
+            margin: 8px 0 16px;
+            letter-spacing: -0.5px;
+        }
+        
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .content p {
+            margin-bottom: 16px;
+            text-align: justify;
+            line-height: 1.7;
+        }
+        
+        .content h2 {
+            font-weight: 500;
+            color: #000;
+            margin-top: 32px;
+            margin-bottom: 12px;
+            font-size: 1.1em;
+        }
+        
+        .content h2:first-of-type {
+            margin-top: 0;
+        }
+        
+        .content em {
+            font-style: italic;
+        }
+        
+        .content a {
+            color: #333;
+            text-decoration: underline;
+        }
+        
+        .content a:hover {
+            color: #000;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 15px;
+            }
+            
+            .page-header {
+                font-size: 2.2em;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="sidebar">
+        <ul class="sidebar-nav">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="../index.html#research">Research</a></li>
+            <li><a href="../index.html#teaching">Teaching</a></li>
+            <li><a href="../index.html#miscellaneous">Misc</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <h1 class="page-header">Research Statement</h1>
+        
+        <div class="content">
+            <h2>Overview</h2>
+            <p>
+                For millennia, mathematics has been built upon human intuition, insight, and the gradual development of rigorous proof systems. Throughout this process, new technological paradigms have repeatedly reshaped mathematical practice. When oral traditions and string-and-knot records could no longer sustain increasingly complex ideas, symbolic notation provided a shared language for abstract reasoning, enabling profound structures to be systematically recorded and transmitted.
+            </p>
+            <p>
+                Thousands of years later, the advent of the computer initiated another profound transformation. Researchers began leveraging large-scale computation for systematic enumeration and experimentation, uncovering patterns, proposing conjectures, and testing their validity. Complex problems in algebra, Euclidean geometry, and number theory became tractable through automated approaches, and century-old challenges like the Four Color Theorem and the Kepler Conjecture were thereby resolved. These developments demonstrated that once new tools are integrated into mathematical practice, they can fundamentally alter both the pace and manner of mathematical discovery.
+            </p>
+            <p>
+                Today, we may stand at the threshold of yet another transformation. Over the past century, the corpus of human mathematical knowledge has expanded at an unprecedented rate. Formal languages such as Lean4 are now offering a new framework for expressing and verifying this vast system. Coincidentally, artificial intelligence represented by large language models has developed rapidly in recent years, demonstrating potential in creativity and reasoning capabilities. Their combination promises to enable mathematicians, for the first time, to conduct "experiments" at the level of logical propositions, much like experimental scientists: generating candidate conjectures, verifying their feasibility, and gradually revealing new structures and patterns through iterative exploration.
+            </p>
+            <p>
+                My research is dedicated to addressing both the opportunities and challenges of this frontier. Situated at the intersection of pure mathematics, computer-assisted proof, and artificial intelligence, I seek to explore and develop new paradigms for mathematical discovery.
+            </p>
+            
+            <h2>Past and Current Research</h2>
+            <p>
+                My work to date focuses on both pure mathematics and the technologies that advance mathematical research. In mathematics, I have worked in the field of extremal combinatorics, contributing to Turán-type problems on graphs and hypergraphs, coding theory, and extremal set theory. Together with my collaborators, I completed the determination of the linear Turán number for linear 3-graphs with at most four edges, initiated the study of the plane-saturation number and generalized different codes, and provided improved bounds for the classical Oddtown problem modulo composite numbers.
+            </p>
+            <p>
+                Alongside these mathematical results, I have been actively integrating technology into my mathematical research. My work includes explorations into the application of computational techniques in mathematics, such as using the occupancy method to study the number of independent sets in hypergraphs and applying the flag algebra method to investigate configuration problems in vector spaces over finite fields. These methodological explorations yielded new mathematical results and provided me with an interdisciplinary perspective on mathematical research.
+            </p>
+            <p>
+                I have also worked on technology in AI and formalization. I contributed a formalization of the Finite Kakeya problem to Google DeepMind's formal-conjectures repository, and the problem later became a representative example demonstrating the effectiveness of Google AI for Math systems. Furthermore, I worked on the Planner-Prover neural theorem proving paradigm and implemented it at scale with my collaborators. This work resulted in BFS-Prover-V2, the SoTA step-level formal theorem prover in Lean4, now released as an open-source tool to the formal math community.
+            </p>
+            
+            <h2>Future Directions</h2>
+            <p>
+                Looking ahead, I intend to remain deeply engaged with the pure mathematics community, closely following problems of central interest and making original contributions. In particular, I aim to further advance the techniques we developed for the Oddtown problem and to pursue several of the classic extremal combinatorics conjectures posed by Erdős and his collaborators. Throughout these explorations, I will continue to reflect on how computational tools can enrich and accelerate the processes of discovery and proof.
+            </p>
+            <p>
+                In parallel, I will actively follow the rapid advances in artificial intelligence and investigate how they can be harnessed to accelerate mathematical discovery. With formal theorem provers now capable of solving Putnam-level and PhD qualifying exam problems, the frontier has shifted toward even more demanding domains, where data sparsity poses an acute challenge. To push this boundary, I plan to develop large-scale auto-formalization systems that translate natural language mathematics into formal language, and to design more scalable reinforcement learning algorithms for formal proof generation. Also, I will maintain the BFS-Prover series for the community and contribute actively to open-source Lean4 formalization repositories, fostering broader access to tools that integrate AI with formal mathematics.
+            </p>
+            <p>
+                Together, these efforts aim to contribute to a form of mathematical discovery where the boundary between human insight and computational methods becomes increasingly fluid, yet mutually reinforcing.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+
