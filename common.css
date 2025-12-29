@@ -125,11 +125,10 @@ h2 {
     .sidebar {
         position: fixed;
         top: 0;
+        bottom: 0;
         right: -100%;
         width: 50%;
         max-width: 200px;
-        height: 100dvh;
-        min-height: 100vh;
         background: rgba(255, 255, 255, 0.5);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
@@ -152,7 +151,7 @@ h2 {
         gap: 20px;
         width: 100%;
         padding: 20px;
-        max-height: 100dvh;
+        max-height: 100%;
         overflow-y: auto;
         box-sizing: border-box;
         -webkit-overflow-scrolling: touch;
