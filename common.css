@@ -125,19 +125,20 @@ h2 {
     .sidebar {
         position: fixed;
         top: 0;
+        bottom: 0;
         right: -100%;
         width: 50%;
         max-width: 200px;
-        height: var(--app-height, 100vh);
         background: rgba(255, 255, 255, 0.5);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        box-shadow: -2px 0 10px rgba(0,0,0,0.1);
         transform: none;
         transition: right 0.3s ease;
         padding: 0;
         overflow: hidden;
         z-index: 1001;
+        display: flex;
+        flex-direction: column;
     }
     
     .sidebar.active {
@@ -145,14 +146,16 @@ h2 {
     }
     
     .sidebar-nav {
+        margin: auto 0;
         gap: 20px;
         width: 100%;
-        height: 100%;
-        padding: calc(20px + env(safe-area-inset-top, 0px)) 20px calc(20px + env(safe-area-inset-bottom, 0px));
+        padding: calc(40px + env(safe-area-inset-top, 0px)) 20px calc(40px + env(safe-area-inset-bottom, 0px));
         overflow-y: auto;
         box-sizing: border-box;
         -webkit-overflow-scrolling: touch;
-        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
     
     .sidebar-nav a {

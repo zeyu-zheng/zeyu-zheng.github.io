@@ -1,25 +1,6 @@
 // Common navigation menu functionality
 (function() {
     'use strict';
-
-    // iOS Safari (and some in-app browsers) have unstable 100vh.
-    // Use visualViewport height when available to drive sidebar height.
-    function setAppHeight() {
-        const vv = window.visualViewport;
-        const h = vv && typeof vv.height === 'number' ? vv.height : window.innerHeight;
-        document.documentElement.style.setProperty('--app-height', `${Math.round(h)}px`);
-    }
-
-    function bindAppHeight() {
-        setAppHeight();
-        window.addEventListener('resize', setAppHeight);
-        window.addEventListener('orientationchange', setAppHeight);
-        if (window.visualViewport) {
-            window.visualViewport.addEventListener('resize', setAppHeight);
-            // Safari may change visual viewport height on scroll (address bar show/hide)
-            window.visualViewport.addEventListener('scroll', setAppHeight);
-        }
-    }
     
     // Generate navigation HTML based on current page path
     function generateNav() {
@@ -107,7 +88,6 @@ ${navItems}
     
     // Run when DOM is ready
     function init() {
-        bindAppHeight();
         insertNav();
         initMenu();
     }
