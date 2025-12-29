@@ -36,6 +36,9 @@
             return `            <li><a href="${link.href}" ${onclick}>${link.text}</a></li>`;
         }).join('\n');
         
+        const overlay = `
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>`;
+        
         const sidebar = `
     <nav class="sidebar" id="sidebar">
         <ul class="sidebar-nav">
@@ -43,7 +46,7 @@ ${navItems}
         </ul>
     </nav>`;
         
-        return menuToggle + sidebar;
+        return menuToggle + overlay + sidebar;
     }
     
     // Insert navigation into body
@@ -59,17 +62,20 @@ ${navItems}
     function initMenu() {
         const menuToggle = document.getElementById('menuToggle');
         const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
         
-        if (!menuToggle || !sidebar) {
+        if (!menuToggle || !sidebar || !overlay) {
             return;
         }
         
         function toggleMenu() {
             sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
         }
         
         function closeMenu() {
             sidebar.classList.remove('active');
+            overlay.classList.remove('active');
         }
         
         // Make closeMenu available globally for onclick handlers
@@ -77,13 +83,8 @@ ${navItems}
         
         menuToggle.addEventListener('click', toggleMenu);
         
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const isClickInside = sidebar.contains(event.target) || menuToggle.contains(event.target);
-            if (!isClickInside && sidebar.classList.contains('active')) {
-                closeMenu();
-            }
-        });
+        // Close menu when clicking overlay
+        overlay.addEventListener('click', closeMenu);
     }
     
     // Run when DOM is ready

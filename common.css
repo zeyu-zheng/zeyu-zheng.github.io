@@ -36,6 +36,24 @@ body {
     transition: 0.3s;
 }
 
+/* Sidebar overlay */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 999;
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
+
 /* Sidebar navigation */
 .sidebar {
     position: fixed;
@@ -129,10 +147,8 @@ h2 {
         right: -100%;
         width: 50%;
         max-width: 200px;
-        background: rgba(255, 255, 255, 0.5);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+        background: transparent;
+        box-shadow: none;
         transform: none;
         transition: right 0.3s ease;
         padding: 0;
