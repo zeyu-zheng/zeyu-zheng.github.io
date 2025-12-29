@@ -124,8 +124,9 @@ h2 {
     
     .sidebar {
         position: fixed;
-        top: 0;
-        bottom: 0;
+        top: calc(-1 * env(safe-area-inset-top, 0px));
+        bottom: calc(-1 * env(safe-area-inset-bottom, 0px));
+        left: auto;
         right: -100%;
         width: 50%;
         max-width: 200px;
