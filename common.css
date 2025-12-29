@@ -126,20 +126,22 @@ h2 {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 70%;
-        max-width: 280px;
-        height: 100vh;
-        background: rgba(255, 255, 255, 0.95);
+        width: 50%;
+        max-width: 200px;
+        height: 100dvh;
+        min-height: 100vh;
+        background: rgba(255, 255, 255, 0.5);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         box-shadow: -2px 0 10px rgba(0,0,0,0.1);
         transform: none;
         transition: right 0.3s ease;
         padding: 0;
-        overflow-y: auto;
+        overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
+        z-index: 1000;
     }
     
     .sidebar.active {
@@ -150,6 +152,10 @@ h2 {
         gap: 20px;
         width: 100%;
         padding: 20px;
+        max-height: 100dvh;
+        overflow-y: auto;
+        box-sizing: border-box;
+        -webkit-overflow-scrolling: touch;
     }
     
     .sidebar-nav a {
