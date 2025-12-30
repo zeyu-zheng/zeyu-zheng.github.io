@@ -5,6 +5,10 @@
     box-sizing: border-box;
 }
 
+html {
+    height: 100%;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     font-size: 17px;
@@ -12,6 +16,17 @@ body {
     color: #222;
     background: #fff;
     position: relative;
+    min-height: 100%;
+}
+
+/* iOS Safari: allow elements to truly fill available height */
+@supports (-webkit-touch-callout: none) {
+    html {
+        height: -webkit-fill-available;
+    }
+    body {
+        min-height: -webkit-fill-available;
+    }
 }
 
 /* Menu toggle button */
@@ -124,12 +139,18 @@ h2 {
     
     .sidebar {
         position: fixed;
-        top: calc(-1 * env(safe-area-inset-top, 0px));
-        bottom: calc(-1 * env(safe-area-inset-bottom, 0px));
+        top: 0;
+        bottom: 0;
         left: auto;
         right: -100%;
         width: 50%;
         max-width: 200px;
+        /* Try the most compatible "full screen" height options on iOS/webviews */
+        height: 100%;
+        height: -webkit-fill-available;
+        height: 100vh;
+        height: 100dvh;
+        height: 100lvh;
         background: rgba(255, 255, 255, 0.5);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
