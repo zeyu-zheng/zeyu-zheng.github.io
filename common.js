@@ -2,6 +2,44 @@
 (function() {
     'use strict';
     
+    // Inject SVG filter for Liquid Glass effect (edge refraction)
+    function injectLiquidGlassFilter() {
+        const svgNS = 'http://www.w3.org/2000/svg';
+        const svg = document.createElementNS(svgNS, 'svg');
+        svg.setAttribute('width', '0');
+        svg.setAttribute('height', '0');
+        svg.style.position = 'absolute';
+        svg.style.pointerEvents = 'none';
+        
+        svg.innerHTML = `
+            <defs>
+                <filter id="liquid-glass" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
+                    <!-- Turbulence for organic distortion -->
+                    <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="3" seed="5" result="noise"/>
+                    
+                    <!-- Edge displacement map -->
+                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G" result="displaced"/>
+                    
+                    <!-- Gaussian blur for frosted glass -->
+                    <feGaussianBlur in="displaced" stdDeviation="0.5" result="blurred"/>
+                    
+                    <!-- Specular lighting for glass shine -->
+                    <feSpecularLighting in="noise" surfaceScale="2" specularConstant="0.8" specularExponent="20" lighting-color="#fff" result="specular">
+                        <fePointLight x="100" y="50" z="200"/>
+                    </feSpecularLighting>
+                    
+                    <!-- Composite specular with blurred -->
+                    <feComposite in="specular" in2="SourceGraphic" operator="in" result="specularMask"/>
+                    
+                    <!-- Blend everything -->
+                    <feBlend in="blurred" in2="specularMask" mode="screen" result="final"/>
+                </filter>
+            </defs>
+        `;
+        
+        document.body.insertBefore(svg, document.body.firstChild);
+    }
+    
     // Generate navigation HTML based on current page path
     function generateNav() {
         const currentPath = window.location.pathname;
@@ -88,6 +126,7 @@ ${navItems}
     
     // Run when DOM is ready
     function init() {
+        injectLiquidGlassFilter();
         insertNav();
         initMenu();
     }
