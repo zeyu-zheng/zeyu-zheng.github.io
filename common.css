@@ -53,10 +53,6 @@ body {
     align-items: center;
 }
 
-.sidebar-nav li {
-    width: 100%;
-}
-
 .sidebar-nav a {
     color: #444;
     text-decoration: none;
@@ -120,22 +116,17 @@ h2 {
     
     .menu-toggle {
         display: block;
-        z-index: 1100;
     }
     
     .sidebar {
         position: fixed;
-        /* anchor below the hamburger button */
         top: calc(16px + env(safe-area-inset-top, 0px) + 44px);
         right: calc(16px + env(safe-area-inset-right, 0px));
         width: 160px;
         border-radius: 24px;
-        box-shadow: 
-            0 12px 48px rgba(0, 0, 0, 0.15),
-            inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6);
         background: transparent;
         border: none;
-        /* GPU-friendly animation */
         transform: translateX(calc(100% + 24px));
         transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
         padding: 0;
@@ -144,35 +135,27 @@ h2 {
         will-change: transform;
     }
 
-    /*
-      Glass panel layer (IMPORTANT):
-      Apply refraction filter ONLY to this layer so text doesn't get "ghosted".
-    */
     .sidebar::before {
         content: "";
         position: absolute;
         inset: 0;
         pointer-events: none;
         border-radius: inherit;
-        /* clearer (less frosted) = lower blur + higher brightness */
         background: rgba(255, 255, 255, 0.06);
         backdrop-filter: blur(14px) saturate(180%) brightness(1.10);
         -webkit-backdrop-filter: blur(14px) saturate(180%) brightness(1.10);
         border: 1px solid rgba(255, 255, 255, 0.45);
-        /* Edge-only refraction (SVG) */
         filter: url(#liquid-glass);
     }
 
-    /* specular highlight overlay (cheap, no filter) */
     .sidebar::after {
         content: "";
         position: absolute;
         inset: 0;
         pointer-events: none;
         border-radius: inherit;
-        background:
-            radial-gradient(170px 150px at 22% 14%, rgba(255,255,255,0.55), rgba(255,255,255,0) 62%),
-            linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0));
+        background: radial-gradient(170px 150px at 22% 14%, rgba(255,255,255,0.55), rgba(255,255,255,0) 62%),
+                    linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0));
         opacity: 0.95;
         mix-blend-mode: screen;
     }
@@ -189,36 +172,27 @@ h2 {
         padding: 12px 10px;
         max-height: 70vh;
         overflow-y: auto;
-        box-sizing: border-box;
         -webkit-overflow-scrolling: touch;
     }
 
     .sidebar-nav a {
-        padding: 12px 12px;
+        padding: 12px;
         font-size: 0.95em;
         text-align: center;
         border-radius: 14px;
         color: rgba(0, 0, 0, 0.9);
-        font-weight: 400;
         background: transparent;
-        border: none;
         transition: all 0.2s ease;
     }
     
     .sidebar-nav a:hover,
     .sidebar-nav a:active {
-        transform: none;
         background: rgba(255, 255, 255, 0.18);
     }
 }
 
-/* Landscape orientation for tablets */
 @media (max-width: 1024px) and (orientation: landscape) {
     .container {
         padding-right: 150px;
-    }
-    
-    .sidebar {
-        right: 15px;
     }
 }
