@@ -61,7 +61,7 @@ body {
     color: #444;
     text-decoration: none;
     font-size: 1.1em;
-    font-weight: 600;
+    font-weight: 400;
     transition: all 0.3s ease;
     text-align: center;
     display: block;
@@ -129,37 +129,52 @@ h2 {
         top: calc(16px + env(safe-area-inset-top, 0px) + 44px);
         right: calc(16px + env(safe-area-inset-right, 0px));
         width: 160px;
-        /* iOS-like Liquid Glass: even higher transparency */
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
-        -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
-        border: 1px solid rgba(255, 255, 255, 0.45);
         border-radius: 24px;
         box-shadow: 
             0 12px 48px rgba(0, 0, 0, 0.15),
             inset 0 1px 0 rgba(255, 255, 255, 0.6);
-        /* SVG liquid glass filter for edge refraction */
-        filter: url(#liquid-glass);
+        background: transparent;
+        border: none;
         /* GPU-friendly animation */
         transform: translateX(calc(100% + 24px));
         transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
         padding: 0;
-        overflow: hidden;
+        overflow: visible;
         z-index: 1000;
         will-change: transform;
     }
 
-    /* subtle glass highlight (cheap) */
+    /*
+      Glass panel layer (IMPORTANT):
+      Apply refraction filter ONLY to this layer so text doesn't get "ghosted".
+    */
     .sidebar::before {
         content: "";
         position: absolute;
         inset: 0;
         pointer-events: none;
         border-radius: inherit;
+        /* clearer (less frosted) = lower blur + higher brightness */
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(14px) saturate(180%) brightness(1.10);
+        -webkit-backdrop-filter: blur(14px) saturate(180%) brightness(1.10);
+        border: 1px solid rgba(255, 255, 255, 0.45);
+        /* Edge-only refraction (SVG) */
+        filter: url(#liquid-glass);
+    }
+
+    /* specular highlight overlay (cheap, no filter) */
+    .sidebar::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        border-radius: inherit;
         background:
-            radial-gradient(160px 140px at 20% 15%, rgba(255,255,255,0.5), rgba(255,255,255,0) 65%),
-            linear-gradient(180deg, rgba(255,255,255,0.2), rgba(255,255,255,0));
-        opacity: 1;
+            radial-gradient(170px 150px at 22% 14%, rgba(255,255,255,0.55), rgba(255,255,255,0) 62%),
+            linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0));
+        opacity: 0.95;
+        mix-blend-mode: screen;
     }
     
     .sidebar.active {
@@ -184,7 +199,7 @@ h2 {
         text-align: center;
         border-radius: 14px;
         color: rgba(0, 0, 0, 0.9);
-        font-weight: 600;
+        font-weight: 400;
         background: transparent;
         border: none;
         transition: all 0.2s ease;
@@ -203,7 +218,7 @@ h2 {
         padding-right: 150px;
     }
     
-    .sidebar.active {
+    .sidebar {
         right: 15px;
     }
 }
