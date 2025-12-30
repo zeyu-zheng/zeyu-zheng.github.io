@@ -61,7 +61,7 @@ body {
     color: #444;
     text-decoration: none;
     font-size: 1.1em;
-    font-weight: 400;
+    font-weight: 600;
     transition: all 0.3s ease;
     text-align: center;
     display: block;
@@ -129,15 +129,15 @@ h2 {
         top: calc(16px + env(safe-area-inset-top, 0px) + 44px);
         right: calc(16px + env(safe-area-inset-right, 0px));
         width: 160px;
-        /* iOS-like Liquid Glass: higher transparency + lighter blur for performance */
-        background: rgba(255, 255, 255, 0.10);
-        backdrop-filter: blur(22px) saturate(170%) brightness(1.08);
-        -webkit-backdrop-filter: blur(22px) saturate(170%) brightness(1.08);
-        border: 1px solid rgba(255, 255, 255, 0.4);
+        /* iOS-like Liquid Glass: even higher transparency */
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
+        -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
+        border: 1px solid rgba(255, 255, 255, 0.45);
         border-radius: 24px;
         box-shadow: 
-            0 10px 40px rgba(0, 0, 0, 0.12),
-            inset 0 1px 0 rgba(255, 255, 255, 0.55);
+            0 12px 48px rgba(0, 0, 0, 0.15),
+            inset 0 1px 0 rgba(255, 255, 255, 0.6);
         /* SVG liquid glass filter for edge refraction */
         filter: url(#liquid-glass);
         /* GPU-friendly animation */
@@ -157,9 +157,9 @@ h2 {
         pointer-events: none;
         border-radius: inherit;
         background:
-            radial-gradient(140px 120px at 20% 15%, rgba(255,255,255,0.45), rgba(255,255,255,0) 60%),
-            linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0));
-        opacity: 0.9;
+            radial-gradient(160px 140px at 20% 15%, rgba(255,255,255,0.5), rgba(255,255,255,0) 65%),
+            linear-gradient(180deg, rgba(255,255,255,0.2), rgba(255,255,255,0));
+        opacity: 1;
     }
     
     .sidebar.active {
@@ -171,24 +171,20 @@ h2 {
         z-index: 1;
         gap: 0;
         width: 100%;
-        padding: 10px;
+        padding: 12px 10px;
         max-height: 70vh;
         overflow-y: auto;
         box-sizing: border-box;
         -webkit-overflow-scrolling: touch;
     }
 
-    .sidebar-nav li + li {
-        border-top: 1px solid rgba(255, 255, 255, 0.18);
-    }
-    
     .sidebar-nav a {
         padding: 12px 12px;
-        font-size: 0.92em;
+        font-size: 0.95em;
         text-align: center;
         border-radius: 14px;
-        color: rgba(0, 0, 0, 0.85);
-        font-weight: 500;
+        color: rgba(0, 0, 0, 0.9);
+        font-weight: 600;
         background: transparent;
         border: none;
         transition: all 0.2s ease;

@@ -23,20 +23,20 @@
                   iOS-like Liquid Glass: edge-only refraction (no heavy lighting).
                   Smoother noise + lower scale to reduce jagged edges.
                 -->
-                <filter id="liquid-glass" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
-                    <!-- Smooth organic noise -->
-                    <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="2" seed="7" result="noiseRaw" />
-                    <feGaussianBlur in="noiseRaw" stdDeviation="0.7" result="noise" />
+                <filter id="liquid-glass" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+                    <!-- Ultra-smooth organic noise: Lower frequency = larger, smoother waves -->
+                    <feTurbulence type="fractalNoise" baseFrequency="0.006" numOctaves="2" seed="12" result="noiseRaw" />
+                    <feGaussianBlur in="noiseRaw" stdDeviation="2.5" result="noise" />
 
-                    <!-- Build an edge mask: SourceAlpha - eroded(SourceAlpha) -->
-                    <feMorphology in="SourceAlpha" operator="erode" radius="2" result="inner" />
+                    <!-- Wider edge mask: radius="5" for a more visible transition -->
+                    <feMorphology in="SourceAlpha" operator="erode" radius="5" result="inner" />
                     <feComposite in="SourceAlpha" in2="inner" operator="out" result="edge" />
-                    <feGaussianBlur in="edge" stdDeviation="0.6" result="edgeSoft" />
+                    <feGaussianBlur in="edge" stdDeviation="3" result="edgeSoft" />
 
-                    <!-- Displace the whole graphic a bit -->
-                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G" result="displacedAll" />
+                    <!-- Stronger displacement for visible refraction (scale="16") -->
+                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="16" xChannelSelector="R" yChannelSelector="G" result="displacedAll" />
 
-                    <!-- Keep displacement only at the edges -->
+                    <!-- Mask displacement to edges only -->
                     <feComposite in="displacedAll" in2="edgeSoft" operator="in" result="displacedEdge" />
                     <feComposite in="SourceGraphic" in2="edgeSoft" operator="out" result="center" />
 
