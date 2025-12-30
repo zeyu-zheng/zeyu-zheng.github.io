@@ -4,8 +4,14 @@
     
     // Inject SVG filter for Liquid Glass effect (edge refraction)
     function injectLiquidGlassFilter() {
+        // Avoid injecting multiple times
+        if (document.getElementById('liquid-glass-svg')) {
+            return;
+        }
+
         const svgNS = 'http://www.w3.org/2000/svg';
         const svg = document.createElementNS(svgNS, 'svg');
+        svg.setAttribute('id', 'liquid-glass-svg');
         svg.setAttribute('width', '0');
         svg.setAttribute('height', '0');
         svg.style.position = 'absolute';
@@ -13,26 +19,32 @@
         
         svg.innerHTML = `
             <defs>
-                <filter id="liquid-glass" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
-                    <!-- Turbulence for organic distortion -->
-                    <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="3" seed="5" result="noise"/>
-                    
-                    <!-- Edge displacement map -->
-                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G" result="displaced"/>
-                    
-                    <!-- Gaussian blur for frosted glass -->
-                    <feGaussianBlur in="displaced" stdDeviation="0.5" result="blurred"/>
-                    
-                    <!-- Specular lighting for glass shine -->
-                    <feSpecularLighting in="noise" surfaceScale="2" specularConstant="0.8" specularExponent="20" lighting-color="#fff" result="specular">
-                        <fePointLight x="100" y="50" z="200"/>
-                    </feSpecularLighting>
-                    
-                    <!-- Composite specular with blurred -->
-                    <feComposite in="specular" in2="SourceGraphic" operator="in" result="specularMask"/>
-                    
-                    <!-- Blend everything -->
-                    <feBlend in="blurred" in2="specularMask" mode="screen" result="final"/>
+                <!--
+                  iOS-like Liquid Glass: edge-only refraction (no heavy lighting).
+                  Smoother noise + lower scale to reduce jagged edges.
+                -->
+                <filter id="liquid-glass" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+                    <!-- Smooth organic noise -->
+                    <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="2" seed="7" result="noiseRaw" />
+                    <feGaussianBlur in="noiseRaw" stdDeviation="0.7" result="noise" />
+
+                    <!-- Build an edge mask: SourceAlpha - eroded(SourceAlpha) -->
+                    <feMorphology in="SourceAlpha" operator="erode" radius="2" result="inner" />
+                    <feComposite in="SourceAlpha" in2="inner" operator="out" result="edge" />
+                    <feGaussianBlur in="edge" stdDeviation="0.6" result="edgeSoft" />
+
+                    <!-- Displace the whole graphic a bit -->
+                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G" result="displacedAll" />
+
+                    <!-- Keep displacement only at the edges -->
+                    <feComposite in="displacedAll" in2="edgeSoft" operator="in" result="displacedEdge" />
+                    <feComposite in="SourceGraphic" in2="edgeSoft" operator="out" result="center" />
+
+                    <!-- Merge back -->
+                    <feMerge>
+                        <feMergeNode in="center" />
+                        <feMergeNode in="displacedEdge" />
+                    </feMerge>
                 </filter>
             </defs>
         `;
