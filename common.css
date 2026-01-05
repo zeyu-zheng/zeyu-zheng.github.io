@@ -191,8 +191,8 @@ h2 {
     }
 }
 
-@media (max-width: 1024px) and (orientation: landscape) {
+@media (max-width: 1400px) {
     .container {
-        padding-right: 150px;
+        padding-right: calc(30px + 180px);
     }
 }
