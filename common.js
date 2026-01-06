@@ -51,6 +51,27 @@
         
         document.body.insertBefore(svg, document.body.firstChild);
     }
+
+    // Initialize MathJax for LaTeX rendering on all pages
+    function initMathJax() {
+        // Avoid double-injecting if script already exists
+        if (document.getElementById('MathJax-script')) return;
+
+        // Global configuration
+        window.MathJax = window.MathJax || {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: { fontCache: 'global' }
+        };
+
+        const script = document.createElement('script');
+        script.id = 'MathJax-script';
+        script.async = true;
+        script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js';
+        document.head.appendChild(script);
+    }
     
     function generateNav() {
         const path = window.location.pathname;
@@ -99,6 +120,7 @@
     const init = () => {
         initGoogleAnalytics();
         injectLiquidGlassFilter();
+        initMathJax();
         document.body.insertAdjacentHTML('afterbegin', generateNav());
         initMenu();
     };

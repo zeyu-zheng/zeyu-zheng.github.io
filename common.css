@@ -79,6 +79,43 @@ body {
     padding: 12px 20px;
 }
 
+/* Shared blog/content layout */
+.content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.content p {
+    margin-bottom: 16px;
+    text-align: justify;
+    line-height: 1.7;
+}
+
+.content h2 {
+    font-weight: 500;
+    color: #000;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    font-size: 1.1em;
+}
+
+.content h2:first-of-type {
+    margin-top: 0;
+}
+
+.content em {
+    font-style: italic;
+}
+
+.content a {
+    color: #333;
+    text-decoration: underline;
+}
+
+.content a:hover {
+    color: #000;
+}
+
 /* Page header */
 .page-header {
     text-align: center;
