@@ -40,7 +40,7 @@ body {
 .sidebar {
     position: fixed;
     top: 50%;
-    right: 30px;
+    right: 5px; /* How far from the right edge of the screen */
     transform: translateY(-50%);
     z-index: 100;
 }
@@ -74,7 +74,7 @@ body {
 
 /* Container */
 .container {
-    max-width: 1000px;
+    max-width: min(1000px, calc(100% - 200px));
     margin: 0 auto;
     padding: 12px 20px;
 }
@@ -102,6 +102,7 @@ h2 {
 /* Mobile responsive styles */
 @media (max-width: 768px) {
     .container {
+        max-width: 1000px;
         padding: 30px 15px;
         padding-right: 20px;
     }
@@ -188,11 +189,5 @@ h2 {
     .sidebar-nav a:hover,
     .sidebar-nav a:active {
         background: rgba(255, 255, 255, 0.18);
-    }
-}
-
-@media (max-width: 1400px) {
-    .container {
-        padding-right: calc(30px + 180px);
     }
 }
