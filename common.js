@@ -2,6 +2,27 @@
 (function() {
     'use strict';
     
+    // Initialize Google Analytics centrally for all pages
+    function initGoogleAnalytics() {
+        // Avoid double-injecting if script already exists
+        if (document.querySelector('script[src^="https://www.googletagmanager.com/gtag/js"]')) {
+            return;
+        }
+
+        // Load gtag.js script
+        const script1 = document.createElement('script');
+        script1.async = true;
+        script1.src = 'https://www.googletagmanager.com/gtag/js?id=G-BHQMZXP12D';
+        document.head.appendChild(script1);
+        
+        // Initialize dataLayer and gtag
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){window.dataLayer.push(arguments);}
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', 'G-BHQMZXP12D');
+    }
+    
     function injectLiquidGlassFilter() {
         if (document.getElementById('liquid-glass-svg')) return;
 
@@ -76,6 +97,7 @@
     }
     
     const init = () => {
+        initGoogleAnalytics();
         injectLiquidGlassFilter();
         document.body.insertAdjacentHTML('afterbegin', generateNav());
         initMenu();
