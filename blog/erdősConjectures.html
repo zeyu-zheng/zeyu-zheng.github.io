@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="icon" href="../favicon.ico">
+    
+    <title>Is AI solving open Erdős problems? | 郑泽宇的主页 | Zeyu Zheng's Homepage</title>
+    
+    <meta name="description" content="A reality check on claims that AI has solved open Erdős problems">
+    <meta name="author" content="Zeyu Zheng">
+    <meta name="keywords" content="Zeyu Zheng; 郑泽宇; CMU; Is AI solving open Erdős problems?">
+    
+    <!-- Common Styles -->
+    <link rel="stylesheet" href="../common.css">
+</head>
+
+<body>
+    <!-- Common JavaScript (generates navigation) -->
+    <script src="../common.js"></script>
+    
+    <div class="container">
+        <h1 class="page-header">Is AI solving open Erdős problems?</h1>
+        
+        <div class="content">
+            <h2>Update (Jan 7, 2026)</h2>
+            <p>
+                After this post was written (and last updated) on Jan 5, 2026, Erdős problem <a href="https://www.erdosproblems.com/forum/thread/728">#728</a> saw a significant new development.
+                The original statement was ambiguous and admits trivial solutions. After discussion on the <a href="https://www.erdosproblems.com">erdosproblems</a> forum, the consensus was that the intended formulation should require $a, b \le (1 - \varepsilon) n$ (to rule out the trivial cases) and take $C$ to be arbitrarily large.
+                With the statement clarified, Kevin Barreto proved the conjecture by prompting ChatGPT-5.2 and then formalized the proof in Lean using Aristotle.
+                Compared to the cases discussed below, this is the clearest evidence so far that an AI may have generated a genuinely new solution to an open Erdős problem with relatively limited human involvement.
+            </p>
+            <p>
+                This does not change the main point of this article: most earlier claims that "AI solved an Erdős problem" still reduce to rediscovery of known results, clarification of ambiguous statements, or verification and formalization of ideas supplied by humans.
+            </p>            
+
+            <h2>TL;DR</h2>
+            <p>
+                As of Jan 5, 2026, no AI system has independently and completely solved a genuinely open Erdős problem. That said, AI has already made meaningful contributions and is actively accelerating progress on several Erdős problems.
+            </p>
+            
+            <h2>Background</h2>
+            <p>
+                The prominent Hungarian mathematician Paul Erdős posed an enormous number of interesting mathematical problems throughout his life, some by himself and some with collaborators. These problems span a wide range of difficulty, and have attracted a lot of interest.
+                Today, as AI has grown increasingly capable at mathematical reasoning, people have started using AI to tackle open Erdős problems.
+            </p>
+            <p>
+                In late 2025, several startups, individuals, and social-media accounts claimed that AI tools had independently solved open Erdős conjectures. These claims include problems <a href="https://www.erdosproblems.com/forum/thread/367">#367</a>, <a href="https://www.erdosproblems.com/forum/thread/124">#124</a>, <a href="https://www.erdosproblems.com/forum/thread/481">#481</a>, <a href="https://www.erdosproblems.com/forum/thread/333">#333</a>, and <a href="https://www.erdosproblems.com/forum/thread/897">#897</a> on <a href="https://www.erdosproblems.com">erdosproblems.com</a>. Below I use a few case studies to clarify what actually happened, what role AI really played, and how far we still are from "AI independently proving frontier mathematics."
+            </p>
+
+            <h2>Case Studies</h2>
+
+            <h3><a href="https://www.erdosproblems.com/forum/thread/367">#367</a> (<a href="https://medium.com/@sridevi.suganya/ai-assistance-to-solve-erdős-problem-367-10133f857958">Media post</a>) (<a href="https://www.linkedin.com/pulse/ai-assistance-solve-erd%C5%91s-problem-367-sridevi-s-ipqnc">LinkedIn post</a>)</h3>
+            <h4>The Problem</h4>
+            <p>
+                Define
+                $B_2(n) = \prod_{p^\alpha \,\Vert\, n,\, \alpha\ge 2} p^\alpha$,
+                i.e., take the prime factorization of $n$ and delete the prime factors that occur only to the first power; multiply what remains.
+                Erdős and Graham suggested in <a href="#ref1">[1]</a> that one can <b>perhaps</b> show
+                $$\prod_{m< n \le m+k} B_2(n) < c_k m^2,$$
+                but they could not even rule out a very extreme scenario where there are infinitely many $m$ such that
+                $$\prod_{m< n \le m+k} B_2(n) = c_k \prod_{i=1}^k (m+i-1).$$
+                They further believed the following is <b>very likely</b> true: for every $k$ and every $\varepsilon>0$,
+                $$\prod_{m\le n < m+k} B_2(n) < m^{2+\varepsilon}.$$
+            </p>
+            <h4>The Progress</h4>
+            <p>
+                Independent researcher Wouter van Doorn proposed a Pell-equation-based construction in the comments on the <a href="https://www.erdosproblems.com">erdosproblems</a> forum, outlining a way to refute the "Perhaps" statement but leaving gaps ("I am sure someone here is able to verify...").
+                Terence Tao then used Gemini Deepthink to fill in the missing details and confirm the approach. The resulting argument was later formalized by Boris Alexeev using Aristotle.
+                The "very likely" statement has not seen much progress yet.
+            </p>
+            <h4>The Role of AI</h4>
+            <p>
+                The AI mostly helped verify the approach. 
+                This conjecture has a "perhaps" part and a "very likely" part. 
+                For the "perhaps" part, after a human supplied a promising construction, the AI helped verify the plan and fill in technical details. 
+                The AI's contribution was to make the argument complete and rigorous.
+            </p>
+
+            <h3><a href="https://www.erdosproblems.com/forum/thread/124">#124</a> (<a href="https://x.com/vladtenev/status/1994922827208663383">X post</a>) (<a href="https://www.linkedin.com/pulse/ai-system-independently-solves-three-decade-old-david-borish-zkauc/">LinkedIn post</a>)</h3>
+            <h4>The Problem</h4>
+            <p>
+                Define $P(d,k)$ to be the set of integers representable as a sum of distinct powers of $d$ of exponent at least $k$ (including $0$). Equivalently, these are the base-$d$ integers whose last $k$ digits are all $0$ and whose digits are only $0$ or $1$.
+                The conjecture first appeared in <a href="#ref2">[2]</a>. Erdős and three coauthors conjectured that for any integer $k\ge 1$, if $\gcd(d_1,d_2,\ldots,d_r)=1$, then every sufficiently large integer can be written as a sum of one element chosen from each $P(d_i,k)$.
+                However, in a later single-author paper by Erdős, <a href="#ref3">[3]</a>, the problem is restated in terms of a set $S(d)$. 
+                The way it is quoted there (see the screenshot below) suppresses indices and, at least in the brief restatement, does not explicitly include the necessary coprimality condition.
+            </p>
+            <div style="text-align: center; margin: 0px 0;">
+                <img src="erdősConjectures1.png" alt="Erdős paper excerpt" style="max-width: 100%; ">
+            </div>
+            <p> 
+                As a result, it is not completely clear from the restatement whether $S(d)$ should correspond to $P(d,0)$ or $P(d,1)$. Given that the original conjecture in <a href="#ref2">[2]</a> explicitly assumes $k\ge 1$ and <a href="#ref3">[3]</a> cites it, I personally suspect that Erdős intended $S(d)=P(d,1)$ (so the later paper is the $k=1$ special case).
+                For convenience, below we will refer to the variant that interprets $S(d)$ as $P(d,0)$ and drops the coprimality condition as the "$k=0$ variant" of the conjecture.
+            </p>
+            <h4>The Progress</h4>
+            <p>
+                Boris Alexeev used Aristotle to prove the $k=0$ variant. The original conjecture has not seen much progress so far.
+            </p>
+            <h4>The Role of AI</h4>
+            <p>
+                With all due respect to the accomplishment of formalizing/proving the $k=0$ variant, 
+                I think the main AI contribution was actually filtering out confusion about what the conjecture was even claiming. 
+                Clarifying a statement is crucial work, but it is still very different from "AI independently solved an open Erdős conjecture".
+            </p>
+
+            <h3><a href="https://www.erdosproblems.com/forum/thread/871">#871</a> (updated on 2026-01-05)</h3>
+            <h4>The Problem</h4>
+            <p>
+                An order-2 additive basis $A$ is a set such that every sufficiently large integer can be written as a sum of two (not necessarily distinct) elements of $A$.
+                Let $r_A(n)$ be the number of representations of $n$ as a sum of two elements of $A$.
+                Erdős and Nathanson proved in <a href="#ref4">[4]</a> that if there exists a constant $c > \log^{-1}(4/3)$ such that $r_A(n) \ge c \log n$ for all $n$, then $A$ can be decomposed as the union of two disjoint order-2 additive bases.
+                They conjectured that this hypothesis could be weakened to $\lim_{n\to\infty} r_A(n) = \infty$.
+            </p>
+            <h4>The Progress</h4>
+            <p>
+                Wouter van Doorn used ChatGPT to find a later, highly relevant Erdős-Nathanson follow-up paper <a href="#ref5">[5]</a>. In <a href="#ref5">[5]</a>, they construct an example with $r_A(n) \ge t$ for all $n$ and fixed $t$ that nevertheless cannot be decomposed as the union of two disjoint order-2 additive bases.
+                While their construction does not directly address the condition $\lim_{n\to\infty} r_A(n)=\infty$, Daniel Larsen reports that his multi-agent system (built with Gemini 3 Pro and Claude Opus 4.5) found a small but nontrivial modification of the same strategy, yielding a counterexample to #871.
+            </p>
+            <h4>The Role of AI</h4>
+            <p>
+                This is a promising example of AI contributing something closer to mathematical discovery.
+                Daniel Larsen described the process as:
+            </p>
+            <p><em>
+                Roughly speaking the process was I read the Erdős-Nathanson paper, wondered what the obstacle was in extending their construction, told my system to formalize the relevant parts of their paper, then to think about the extension, then to formalize it.
+            </em></p>
+            <p>
+                A human provided the rough idea that existing constructions might inspire a counterexample. 
+                Then, AI helped refine the idea through reasoning and formalization, ultimately producing the counterexample. 
+                In this problem, AI's contribution was more essential than in other cases. 
+                It didn't merely fill in proof details as in <a href="https://www.erdosproblems.com/forum/thread/367">#367</a>, but actually suggested how to adapt existing techniques to construct the counterexample.
+            </p>
+
+            <h3><a href="https://www.erdosproblems.com/forum/thread/481">#481</a> (<a href="https://x.com/AISafetyMemes/status/1996625487985365492">X post 1</a>) (<a href="https://x.com/teortaxesTex/status/1996002260745126152">X post 2</a>), <a href="https://www.erdosproblems.com/forum/thread/333">#333</a> (<a href="https://www.reddit.com/r/singularity/comments/1pv3nl3/gpt52_pro_solved_erdos_problem_333/">Reddit post</a>), <a href="https://www.erdosproblems.com/forum/thread/897">#897</a> (<a href="https://x.com/spicey_lemonade/status/2004558572496035892">X post</a>)</h3>
+            <h4>The Progress</h4>
+            <p>
+                These cases followed a similar pattern: an AI tool appeared to produce a proof "independently," and people initially took this as evidence that an open Erdős conjecture had been solved by AI. Soon after, it turned out that essentially the same proof already existed in the literature. The result had not been "open" in the intended sense; it had simply been overlooked or not widely known in the relevant communities. For more context, see <a href="https://mathstodon.xyz/@tao/115788262274999408">Terry Tao's post</a>.
+            </p>
+            <h4>The Role of AI</h4>
+            <p>
+                In these examples, AI's main contribution was effectively literature retrieval. 
+                This is not limited to search agents that explicitly call search tools for retrieval.
+                Almost certainly, at least some AI companies are (legally or illegally) collecting and extracting high-quality text from the mathematical literature for training and therefore the model remembers these materials in its weights.
+                When a similar problem is asked later, the model leverages these internalized patterns to reconstruct the solution, and this process acts as a form of implicit retrieval from the model's parametric memory.
+            </p>
+
+            <h2>Summary</h2>
+            <p>
+                For a more comprehensive list of how AI is contributing to Erdős problems, the community maintains a wiki page:
+                <a href="https://github.com/teorth/erdosproblems/wiki/AI-contributions-to-Erd%C5%91s-problems">AI contributions to Erdős problems</a>.
+            </p>
+            <p>
+                The goal of this post is to fact-check claims that "AI solved an Erdős problem", and to clarify what AI has actually accomplished in these examples and where the technology currently stands.
+            </p>
+            <p>
+                2025 was nevertheless a remarkable year for AI for mathematics. 
+                Systems that combine language models with proof assistants progressed from struggling on relatively elementary problems to contributing meaningfully on research-level questions. 
+                This reflects advances in reinforcement learning and agentic systems, the growing maturity of Lean and mathlib, and increasing collaboration between mathematicians and AI researchers.
+                Still, the state of the art has not reached the point where we should expect fully autonomous resolution of deep open conjectures. 
+            </p>
+            <p>
+                Even so, I do believe that, with continued progress, we may not be very far.
+            </p>
+
+            <h2>References</h2>
+            <p id="ref1">
+                [1] Erdős, P., & Graham, R. L. (1980). <a href="https://mathweb.ucsd.edu/~ronspubs/80_11_number_theory.pdf"><em>Old and new problems and results in combinatorial number theory</em></a> (Vol. 28). L'Enseignement Mathématiques, Université de Genève.
+            </p>
+            <p id="ref2">
+                [2] Burr, S. A., Erdős, P., Graham, R. L., & Li, W. W. C. (1996). <a href="https://mathweb.ucsd.edu/~ronspubs/96_05_integer_powers.pdf">Complete sequences of sets of integer powers</a>. <em>Acta Arithmetica</em>, 77(2), 133-138.
+            </p>
+            <p id="ref3">
+                [3] Erdős, P. (1997). <a href="https://web.archive.org/web/20231014023058/https://www.thebookshelf.auckland.ac.nz/docs/NZJMaths/nzjmaths026/nzjmaths026-02-001.pdf">Problems in number theory</a>. <em>New Zealand Journal of Mathematics</em>, 26(2), 155-160.
+            </p>
+            <p id="ref4">
+                [4] Erdős, P., & Nathanson, M. B. (1988). <a href="https://users.renyi.hu/~p_erdos/1988-25.pdf">Partitions of bases into disjoint unions of bases</a>. <em>Journal of Number Theory</em>, 29(1), 1-9.
+            </p>
+            <p id="ref5">
+                [5] Erdős, P., & Nathanson, M. B. (1989). <a href="https://users.renyi.hu/~p_erdos/1989-03.pdf">Additive bases with many representations</a>. <em>Acta Arithmetica</em>, 52(4), 399-406.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
