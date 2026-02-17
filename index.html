@@ -61,10 +61,15 @@
             flex: 1 1 auto;
         }
         
-        .profile-image {
+        .col-md-5.profile-photo-col {
+            height: 333px;
+            overflow: hidden;
+        }
+        .profile-photo-col .profile-image {
             width: 100%;
-            max-width: 380px;
-            display: block;
+            height: 100%;
+            object-fit: cover;
+            object-position: left center;
         }
         
         .bio-text p {
@@ -190,8 +195,8 @@
         
         <div class="profile-section">
             <div class="row">
-                <div class="col-md-5">
-                    <img class="profile-image" src="TalkPhoto.jpg" alt="Zeyu Zheng's Photo">
+                <div class="col-md-5 profile-photo-col">
+                    <img class="profile-image" src="Photo.jpg" alt="Zeyu Zheng's Photo">
                 </div>
                 <div class="col-md-7">
                     <div class="bio-text">
@@ -236,7 +241,31 @@
         <ol class="list list--numbered" reversed>
             <li class="list-item">
                 <div class="item-title">
-                    <a href="https://github.com/ByteDance-Seed/Seed-Prover/tree/main/SeedProver-1.5" target="_blank">Seed-Prover 1.5: Mastering Undergraduate-Level Theorem Proving via Learning from Experience</a>
+                    Turán-type problems over finite fields
+                </div>
+                <div class="item-meta">Ping Hu, Bernard Lidický, Jiayi Lu, <u>Zeyu Zheng</u></div>
+                <div class="item-venue">Manuscript</div>
+            </li>
+
+            <li class="list-item">
+                <div class="item-title">
+                    <a href="https://seed.bytedance.com/en/seed2" target="_blank">Seed2.0: Towards Intelligence Frontier for Real-World Complexity</a>
+                </div>
+                <div class="item-meta">ByteDance Seed</div>
+                <div class="item-venue">Technical Report</div>
+            </li>
+
+            <li class="list-item">
+                <div class="item-title">
+                    <a href="GUI.pdf" target="_blank">Turing Test on Screen: A Benchmark for Mobile GUI Agent Humanization</a>
+                </div>
+                <div class="item-meta">Jiachen Zhu, Lingyu Yang, Rong Shan, Congmin Zheng, <u>Zeyu Zheng</u>, Weiwen Liu, Yong Yu, Weinan Zhang, Jianghao Lin</div>
+                <div class="item-venue">Under review</div>
+            </li>
+
+            <li class="list-item">
+                <div class="item-title">
+                    <a href="https://seed.bytedance.com/en/blog/seed-prover-1-5-advanced-mathematical-reasoning-through-a-novel-agentic-architecture?view_from=content_recommend" target="_blank">Seed-Prover 1.5: Mastering Undergraduate-Level Theorem Proving via Learning from Experience</a>
                 </div>
                 <div class="item-meta">ByteDance Seed AI4Math</div>
                 <div class="item-venue">Technical Report</div>
@@ -244,41 +273,49 @@
 
             <li class="list-item">
                 <div class="item-title">
-                    <a href="https://www.arxiv.org/abs/2510.08049" target="_blank">A Survey of Process Reward Models: From Outcome Signals to Process Supervisions for Large Language Models</a>
+                    <a href="https://seed.bytedance.com/en/seed1_8" target="_blank">Seed1.8: Towards Generalized Real-World Agency</a>
                 </div>
-                <div class="item-meta">Congming Zheng<sup>*</sup>, Jiachen Zhu<sup>*</sup>, Zhuoying Ou<sup>*</sup>, Yuxiang Chen, Kangning Zhang, Rong Shan, Zeyu Zheng, Mengyue Yang, Jianghao Lin, Yong Yu, Weinan Zhang</div>
-                <div class="item-venue">Under review</div>
-            </li>
-
-            <li class="list-item">
-                <div class="item-title">
-                    <a href="https://bfs-prover.github.io/V2/" target="_blank">BFS-Prover-V2: Scaling up Multi-Turn Off-Policy RL and Multi-Agent Tree Search for LLM Step-Provers</a>
-                </div>
-                <div class="item-meta">Ran Xin<sup>*</sup>, Zeyu Zheng<sup>*</sup>, Yanchen Nie<sup>*</sup>, Kun Yuan, Xia Xiao</div>
-                <div class="item-venue">Under review</div>
+                <div class="item-meta">ByteDance Seed</div>
+                <div class="item-venue">Technical Report</div>
             </li>
 
             <li class="list-item">
                 <div class="item-title">
                     <a href="https://arxiv.org/abs/2509.00586" target="_blank">The Oddtown problem modulo a composite number</a>
                 </div>
-                <div class="item-meta">Boris Bukh, Ting-Wei Chao, Zeyu Zheng</div>
+                <div class="item-meta">Boris Bukh, Ting-Wei Chao, <u>Zeyu Zheng</u></div>
                 <div class="item-venue">Under review</div>
+            </li>
+
+            <li class="list-item">
+                <div class="item-title">
+                    <a href="https://www.arxiv.org/abs/2510.08049" target="_blank">A Survey of Process Reward Models: From Outcome Signals to Process Supervisions for Large Language Models</a>
+                </div>
+                <div class="item-meta">Congming Zheng<sup>*</sup>, Jiachen Zhu<sup>*</sup>, Zhuoying Ou<sup>*</sup>, Yuxiang Chen, Kangning Zhang, Rong Shan, <u>Zeyu Zheng</u>, Mengyue Yang, Jianghao Lin, Yong Yu, Weinan Zhang</div>
+                <div class="item-venue">ACL 2026</div>
+            </li>
+
+            <li class="list-item">
+                <div class="item-title">
+                    <a href="https://bfs-prover.github.io/V2/" target="_blank">BFS-Prover-V2: Scaling up Multi-Turn Off-Policy RL and Multi-Agent Tree Search for LLM Step-Provers</a>
+                </div>
+                <div class="item-meta">Ran Xin<sup>*</sup>, <u>Zeyu Zheng</u><sup>*</sup>, Yanchen Nie<sup>*</sup>, Kun Yuan, Xia Xiao</div>
+                <div class="item-venue">AI for Math workshop @ NeurIPS 2025</div>
             </li>
             
             <li class="list-item">
                 <div class="item-title">
                     <a href="https://arxiv.org/abs/2505.07706" target="_blank">The generalized trifference problem</a>
                 </div>
-                <div class="item-meta">Anurag Bishnoi, Bartłomiej Kielak, Benedek Kovács, Zoltán Lóránt Nagy, Gábor Somlai, Máté Vizer, Zeyu Zheng</div>
-                <div class="item-venue">Under review</div>
+                <div class="item-meta">Anurag Bishnoi, Bartłomiej Kielak, Benedek Kovács, Zoltán Lóránt Nagy, Gábor Somlai, Máté Vizer, <u>Zeyu Zheng</u></div>
+                <div class="item-venue">IEEE Transactions on Information Theory (2026)</div>
             </li>
             
             <li class="list-item">
                 <div class="item-title">
                     <a href="https://arxiv.org/abs/2502.05438" target="_blank">On the number of edges in saturated partial embeddings of maximal planar graphs</a>
                 </div>
-                <div class="item-meta">János Barát, Zoltán L. Blázsik, Balázs Keszegh, Zeyu Zheng</div>
+                <div class="item-meta">János Barát, Zoltán L. Blázsik, Balázs Keszegh, <u>Zeyu Zheng</u></div>
                 <div class="item-venue">Under review</div>
             </li>
             
@@ -286,7 +323,7 @@
                 <div class="item-title">
                     <a href="https://arxiv.org/abs/2307.07711" target="_blank">Sandpile prediction on undirected graphs</a>
                 </div>
-                <div class="item-meta">Ruinian Chang, Jingbang Chen, Ian Munro, Richard Peng, Qingyu Shi, Zeyu Zheng</div>
+                <div class="item-meta">Ruinian Chang, Jingbang Chen, Ian Munro, Richard Peng, Qingyu Shi, <u>Zeyu Zheng</u></div>
                 <div class="item-venue">Under review</div>
             </li>
             
@@ -294,7 +331,7 @@
                 <div class="item-title">
                     <a href="https://arxiv.org/abs/2208.13477" target="_blank">Extremal planar graphs with no cycles of particular lengths</a>
                 </div>
-                <div class="item-meta">Ervin Győri, Xianzhi Wang, Zeyu Zheng</div>
+                <div class="item-meta">Ervin Győri, Xianzhi Wang, <u>Zeyu Zheng</u></div>
                 <div class="item-venue">Under review</div>
             </li>
             
@@ -302,7 +339,7 @@
                 <div class="item-title">
                     <a href="https://egres.elte.hu/www/tr-22-13.html" target="_blank">Four-regular graphs with extremal rigidity properties</a>
                 </div>
-                <div class="item-meta">Tibor Jordán, Robin Huang, Henry Simmons, Kaylee Weatherspoon, Zeyu Zheng</div>
+                <div class="item-meta">Tibor Jordán, Robin Huang, Henry Simmons, Kaylee Weatherspoon, <u>Zeyu Zheng</u></div>
                 <div class="item-venue">
                     <a href="https://www.sciencedirect.com/science/article/pii/S0012365X23005198" target="_blank">Discrete Mathematics 347 (2024), no. 4, 113833.</a>
                 </div>
@@ -312,7 +349,7 @@
                 <div class="item-title">
                     <a href="https://arxiv.org/abs/2206.04154" target="_blank">Common kings of a chain of cycles in a strong tournament</a>
                 </div>
-                <div class="item-meta">Logan Post, Zeyu Zheng</div>
+                <div class="item-meta">Logan Post, <u>Zeyu Zheng</u></div>
                 <div class="item-venue">
                     <a href="https://link.springer.com/article/10.1007/s00373-023-02665-5" target="_blank">Graphs and Combinatorics 39 (2023), no. 4, 71.</a>
                 </div>
@@ -322,7 +359,7 @@
                 <div class="item-title">
                     <a href="https://arxiv.org/abs/2109.10520" target="_blank">On the Turán number of the linear $3$-graph $C_{13}$</a>
                 </div>
-                <div class="item-meta">Chaoliang Tang, Hehui Wu, Shengtong Zhang, Zeyu Zheng</div>
+                <div class="item-meta">Chaoliang Tang, Hehui Wu, Shengtong Zhang, <u>Zeyu Zheng</u></div>
                 <div class="item-venue">
                     <a href="https://www.combinatorics.org/ojs/index.php/eljc/article/view/v29i3p46" target="_blank">The Electronic Journal of Combinatorics (2022), P3–46.</a>
                 </div>
@@ -331,8 +368,7 @@
         
         <h2 id="teaching">Teaching</h2>
         <ul class="list">
-            <li class="list-item">Fall 2025: TA for Multivariate Analysis at CMU</li>
-            <li class="list-item">Spring 2025: TA for Multivariate Analysis at CMU</li>
+            <li class="list-item">Spring 2026, Fall 2025, Spring 2025: TA for Multivariate Analysis at CMU</li>
             <li class="list-item">Fall 2024: TA for Combinatorics at CMU, TA for <a href="https://www.math.cmu.edu/~ploh/2024-putnam.shtml" target="_blank">Putnam Seminar</a> at CMU</li>
             <li class="list-item">Spring 2024: TA for Combinatorics at CMU</li>
             <li class="list-item">Fall 2023: TA for <a href="https://www.math.cmu.edu/~ploh/2023-putnam.shtml" target="_blank">Putnam Seminar</a> at CMU</li>
