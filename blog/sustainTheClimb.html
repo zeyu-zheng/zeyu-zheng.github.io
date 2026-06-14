@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="icon" href="../favicon.ico">
+
+    <title>Sustain the climb | 郑泽宇的主页 | Zeyu Zheng's Homepage</title>
+
+    <meta name="description" content="Why long RL/post-training runs plateau and how soft resets fix it. Analysis with examples from MAI-Thinking-1 and BFS-Prover-V2.">
+    <meta name="author" content="Zeyu Zheng">
+    <meta name="keywords" content="Zeyu Zheng; 郑泽宇; CMU; MAI-Thinking-1; BFS-Prover-V2; reinforcement learning; self-distillation; expert iteration; entropy collapse">
+
+    <link rel="stylesheet" href="../common.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+</head>
+
+<body>
+    <script src="../common.js"></script>
+
+    <div class="container">
+        <h1 class="page-header">Sustain the climb</h1>
+
+        <div class="content">
+            <p style="color: #666; font-size: 0.95em;">
+                Zeyu Zheng &nbsp;·&nbsp; June 12, 2026
+            </p>
+
+            <h2>Background</h2>
+            <p>
+                In the recent <a href="https://microsoft.ai/pdf/mai-thinking-1.pdf">MAI-Thinking-1 technical report</a> <a href="#ref1">[1]</a>, a "self-distillation" mechanism (Section 3.1.4) is introduced where they periodically pause RL, SFT on a clean checkpoint using collected rollouts, and resume training.
+                This aligns with our approach in <a href="https://bfs-prover.github.io/V2/">BFS-Prover-V2</a> <a href="#ref2">[2]</a>. Despite very different scales and domains, the training curves show the exact same pattern.
+            </p>
+
+            <div style="margin: 24px -12.5%;">
+                <div style="display: flex; gap: 20px; align-items: center;">
+                    <div style="flex: 1;">
+                        <img src="mai-figure15-self-distillation.png" alt="MAI-Thinking-1 Figure 15" style="max-width: 100%;">
+                    </div>
+                    <div style="flex: 1;">
+                        <img src="bfs-figure4.png" alt="BFS-Prover-V2 Figure 4" style="max-width: 100%;">
+                    </div>
+                </div>
+                <div style="display: flex; gap: 20px; margin-top: 8px;">
+                    <p style="flex: 1; font-size: 0.82em; color: #666; margin: 0;"><b>MAI-Thinking-1, Fig. 15</b> (Section 3.1.4). ⋆ = soft reset (self-distillation). Different colors = base upgrade (new pre/mid-trained model).</p>
+                    <p style="flex: 1; font-size: 0.82em; color: #666; margin: 0;"><b>BFS-Prover-V2, Fig. 4</b> (Section 2.2). "Retrain" = soft reset (periodic retraining). "Scale up" = base upgrade (larger model).</p>
+                </div>
+            </div>
+
+            <h2>The train-inference numerics gap</h2>
+            <p>
+                In most modern RL systems, training and inference use different kernels and parallelism strategies for different optimization priorities. Floating-point non-associativity then causes them to produce slightly different logprobs for the same input, which compound across long rollouts and destabilize the importance-sampling correction (<a href="#ref1">[1]</a>, Section 3.6.4). As a concrete example, consider the GRPO objective used in <a href="#ref1">[1]</a>:
+            </p>
+            $$J(\theta) = \mathbb{E}\left[\frac{1}{\sum_{i=1}^G |y_i|} \sum_{i=1}^G \sum_{t=1}^{|y_i|} \min\left(r_{i,t}(\theta)\, A_i,\; \text{clip}(r_{i,t}(\theta), 1{-}\epsilon, 1{+}\epsilon)\, A_i\right)\right]$$
+            <p>
+                where $r_{i,t}(\theta) = \pi_\theta^{\text{train}}(y_{i,t} \mid q, y_{i,{<}t}) \,/\, \pi_{\text{old}}^{\text{inference}}(y_{i,t} \mid q, y_{i,{<}t})$. The numerator and denominator are computed by different systems, so
+            </p>
+            $$\log r_{i,t} \;=\; \log \frac{\pi_\theta^{\text{train}}}{\pi_{\text{old}}^{\text{inference}}} \;=\; \log \frac{\pi_\theta^{\text{inference}}}{\pi_{\text{old}}^{\text{inference}}} + \log \frac{\pi_\theta^{\text{train}}}{\pi_\theta^{\text{inference}}} \;=\; \underbrace{\log \frac{\pi_\theta^{\text{inference}}}{\pi_{\text{old}}^{\text{inference}}}}_{\text{policy change}} + \underbrace{\epsilon_t}_{\text{mismatch}}$$
+            <p>
+                where $\epsilon_t = \log \pi_\theta^{\text{train}} - \log \pi_\theta^{\text{inference}}$.
+            <p>
+                Individual $\epsilon_t$ are small, but they accumulate over the sequence and can significantly corrupt the ratio. Normally the clip in the objective bounds the ratio to $[1-\epsilon, 1+\epsilon]$, but the GRPO objective intentionally leaves certain branches unclipped (when $A_i < 0, r > 1$ or $A_i > 0, r < 1$), allowing the policy to correct itself freely. In these branches, inflated ratios pass through unbounded and produce gradient-norm spikes. To address this, MAI
+            </p>
+            <ul>
+                <li>adds an outer ratio clip ($r_{\max} = 50$) to cap $r_{i,t}$ in unclipped branches</li>
+                <li>uses bf16 for both systems and replays MoE routing decisions to lower $|\epsilon_t|$</li>
+                <li>replays top-$p$ masks during training (setting excluded logits to $-\infty$) so that $\pi_\theta^{\text{train}}(y_{i,t}) \approx 0$ whenever $\pi_{\text{old}}^{\text{inference}}(y_{i,t}) \approx 0$, preventing extreme ratios</li>
+            </ul>
+            <p>
+                But even with all of these, drift can still accumulate over long runs (<a href="#ref1">[1]</a>, Section 3.6.4). A soft reset addresses this by starting from a fresh checkpoint.
+            </p>
+            <p>
+                <b>Model merging</b> is another technique that can address this and is increasingly adopted by AI labs in their post-training pipelines. Different runs from the same base accumulate drift on different tokens, so averaging their parameters cancels out run-specific corruptions.
+            </p>
+
+            <h2>Beyond numerical precision</h2>
+            <p>
+                BFS-Prover-V2 uses expert iteration, an offline RL algorithm that does not compute importance-sampling ratios and is therefore not affected by train-inference numerical mismatch. Yet soft resets still help. The more general failure mode is the policy settling into a local optimum in parameter space, often accompanied by entropy collapse. In BFS-Prover-V2, each soft reset causes only a small performance drop but significantly restores entropy, allowing the model to resume exploration. In addition to soft resets, MAI also addresses entropy during training with an adaptive control mechanism (Section 3.1.1), estimating policy entropy at each step:
+            </p>
+            $$\hat{H}(\pi_\theta) = \frac{1}{|T|} \sum_{(i,t) \in T} -\log \pi_\theta(y_{i,t} \mid \cdot) \cdot r_{i,t}(\theta)$$
+            <p>
+                and adjusting the upper clip bound $k$ to maintain target entropy $H^\star = 0.3$:
+            </p>
+            $$k \leftarrow \text{clip}\left(k + \delta \cdot \text{sign}(H^\star - \hat{H}(\pi_\theta)),\; 0,\; k_{\max}\right)$$
+            <p>
+                This helps with entropy, but parameters can still remain trapped in a basin that small gradient steps cannot escape. A soft reset jumps to a different point in parameter space entirely, which is why performance dips briefly then climbs past the previous ceiling. Model merging can also escape local optima, since independent runs settle into different basins and their average lands outside any single one.
+            </p>
+
+            <h2>Refresh your data</h2>
+            <p>
+                What data should the resetting SFT train on? Both MAI and BFS-Prover-V2 converge on three principles.
+            </p>
+            <ul>
+                <li><b>Data freshness.</b> After a long training run, much of the accumulated data was generated when the model was still weak. These early traces contain reasoning patterns the model has since outgrown, and training on them re-introduces suboptimal behaviors. MAI (Section 3.1.4) reports that self-distillation should use traces from later checkpoints, and that sampling from multiple strong checkpoints outperforms single-checkpoint sampling. In BFS-Prover-V2, the re-synthesis step achieves this by re-running the strongest model on the entire prompt set, replacing all historical trajectories with shorter, cleaner ones.</li>
+                <li><b>Frontier-adaptive filtering.</b> Not all data from the current policy is equally useful. Problems the model already solves consistently provide no learning signal. Problems with very low success rates may have faulty ground truth, or simply yield too little gradient to be useful. MAI implements this at the problem level with a two-stage pass-rate filter (Stage 1 uses $G_{\text{early}}=16$ samples with $\rho \in [0.05, 0.8]$, Stage 2 uses the full $G=128$ with $\rho \in [0.1, 0.8]$). BFS-Prover-V2 implements this at the tactic level by filtering on perplexity: trivially easy tactics (low perplexity) and noisy tactics (high perplexity) are both discarded.</li>
+                <li><b>Diversity over volume.</b> MAI reports that for a fixed token budget, prompt diversity is more valuable than trace diversity per prompt. We also had similar observations when blending RFT data in BFS-Prover-V2.</li>
+            </ul>
+
+            <div style="margin: 24px -12.5%;">
+                <div style="display: flex; gap: 20px; align-items: center;">
+                    <div style="flex: 1;">
+                        <img src="mai-filtering-2d.png" alt="MAI 2D filtering landscape" style="max-width: 100%;">
+                    </div>
+                    <div style="flex: 1;">
+                        <img src="bfs-tactic-ppl.png" alt="BFS-Prover-V2 tactic perplexity filtering" style="max-width: 100%;">
+                    </div>
+                </div>
+                <div style="display: flex; gap: 20px; margin-top: 8px;">
+                    <p style="flex: 1; font-size: 0.82em; color: #666; margin: 0;"><b>MAI-Thinking-1</b> (Section 3.1.3). Two-stage problem sampling with pass-rate filter $\rho \in [0.05, 0.8]$ then $\rho \in [0.1, 0.8]$.</p>
+                    <p style="flex: 1; font-size: 0.82em; color: #666; margin: 0;"><b>BFS-Prover-V2, Fig. 2</b> (Section 2.2.1). Tactic-level perplexity filtering. Low and high tails filtered out.</p>
+                </div>
+            </div>
+
+            <p>
+                For details on our approach, see the <a href="https://arxiv.org/abs/2509.06493">BFS-Prover-V2 paper</a>.
+            </p>
+
+            <h2>References</h2>
+            <p id="ref1">
+                [1] The Microsoft AI Team. <a href="https://microsoft.ai/pdf/mai-thinking-1.pdf">MAI-Thinking-1: Building a Hill-Climbing Machine</a>. Technical Report, 2026.
+            </p>
+            <p id="ref2">
+                [2] Xin*, R., Zheng*, Z., Nie*, Y., Yuan, K., Xiao, X. <a href="https://arxiv.org/abs/2509.06493">BFS-Prover-V2: Scaling up Multi-Turn Off-Policy RL and Multi-Agent Tree Search for LLM Step-Provers</a>. ICML 2026.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
