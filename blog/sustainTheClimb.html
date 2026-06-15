@@ -56,7 +56,7 @@
 
             <h2>The train-inference numerics gap</h2>
             <p>
-                In most modern RL systems, training and inference use different kernels and parallelism strategies for different optimization priorities, which — together with floating-point non-determinism — causes them to produce slightly different logprobs for the same input. These discrepancies compound across long rollouts and destabilize the importance-sampling correction (<a href="#ref1">[1]</a>, Section 3.6.4). As a concrete example, consider the GRPO objective used in <a href="#ref1">[1]</a>:
+                In most modern RL systems, training and inference use different kernels and parallelism strategies for different optimization priorities, which causes them to produce slightly different outputs for the same input. These discrepancies compound across long rollouts and destabilize the importance-sampling correction (<a href="#ref1">[1]</a>, Section 3.6.4). As a concrete example, consider the GRPO objective used in <a href="#ref1">[1]</a>:
             </p>
             $$J(\theta) = \mathbb{E}\left[\frac{1}{\sum_{i=1}^G |y_i|} \sum_{i=1}^G \sum_{t=1}^{|y_i|} \min\left(r_{i,t}(\theta)\, A_i,\; \text{clip}(r_{i,t}(\theta), 1{-}\epsilon, 1{+}\epsilon)\, A_i\right)\right]$$
             <p>
