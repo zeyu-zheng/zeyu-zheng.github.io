@@ -140,6 +140,11 @@ h2 {
 @media (max-width: 768px) {
     .blog-header-inner {
         max-width: 100%;
+        padding: 0 15px;
+    }
+    .blog-header a,
+    .blog-header .post-date {
+        white-space: nowrap;
     }
     .container {
         max-width: 1000px;
