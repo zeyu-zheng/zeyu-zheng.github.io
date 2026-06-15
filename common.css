@@ -140,11 +140,12 @@ h2 {
 /* Mobile responsive styles */
 @media (max-width: 768px) {
     .blog-header {
-        padding: 12px 15px 10px;
+        padding: 12px 16px 10px;
     }
     .blog-header-inner {
         max-width: 100%;
         padding: 0;
+        width: 100%;
     }
     .blog-header a,
     .blog-header .post-date {
