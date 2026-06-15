@@ -12,6 +12,7 @@ body {
     color: #222;
     background: #fff;
     position: relative;
+    overflow-x: hidden;
 }
 
 /* Menu toggle button */
@@ -149,6 +150,13 @@ h2 {
     .blog-header .post-date {
         white-space: nowrap;
     }
+    .content .katex-display,
+    .content .MathJax_Display,
+    .content mjx-container {
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
     .container {
         max-width: 1000px;
         padding: 30px 15px;
@@ -280,4 +288,14 @@ h2 {
     color: #777;
     font-size: 0.9em;
     font-weight: normal;
+}
+
+.wide-figures {
+    margin: 24px -12.5%;
+}
+
+@media (max-width: 768px) {
+    .wide-figures {
+        margin: 24px 0;
+    }
 }
