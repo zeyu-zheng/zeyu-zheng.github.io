@@ -230,6 +230,7 @@ h2 {
 }
 
 /* Blog header bar */
+
 .blog-header {
     max-width: min(1000px, calc(100% - 200px));
     margin: 0 auto;
@@ -239,6 +240,10 @@ h2 {
     align-items: baseline;
     border-bottom: 1px solid #eee;
     margin-bottom: 8px;
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 50;
 }
 
 .blog-header a {
