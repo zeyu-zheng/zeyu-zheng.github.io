@@ -138,6 +138,10 @@ h2 {
 
 /* Mobile responsive styles */
 @media (max-width: 768px) {
+    .blog-header {
+        max-width: 100%;
+        padding: 12px 15px 10px;
+    }
     .container {
         max-width: 1000px;
         padding: 30px 15px;
