@@ -228,3 +228,33 @@ h2 {
         background: rgba(255, 255, 255, 0.18);
     }
 }
+
+/* Blog header bar */
+.blog-header {
+    max-width: min(1000px, calc(100% - 200px));
+    margin: 0 auto;
+    padding: 16px 20px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 8px;
+}
+
+.blog-header a {
+    color: #444;
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+}
+
+.blog-header a:hover {
+    color: #000;
+}
+
+.blog-header .post-date {
+    color: #888;
+    font-size: 0.82em;
+    font-weight: normal;
+}
