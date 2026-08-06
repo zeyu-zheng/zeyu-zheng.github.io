@@ -105,11 +105,10 @@
         const sidebar = document.getElementById('sidebar');
         if (!menuToggle || !sidebar) return;
         
-        const toggleMenu = () => sidebar.classList.toggle('active');
         const closeMenu = () => sidebar.classList.remove('active');
         
         window.closeMenu = closeMenu;
-        menuToggle.addEventListener('click', toggleMenu);
+        menuToggle.addEventListener('click', () => sidebar.classList.toggle('active'));
         document.addEventListener('click', (e) => {
             if (!sidebar.contains(e.target) && !menuToggle.contains(e.target) && sidebar.classList.contains('active')) {
                 closeMenu();

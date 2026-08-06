@@ -34,7 +34,6 @@
         
         .quote-text {
             font-style: italic;
-            font-size: 1.15em;
             color: #555;
             text-align: center;
             margin-bottom: 8px;
@@ -43,7 +42,6 @@
         .quote-author {
             text-align: right;
             color: #777;
-            font-size: 0.95em;
         }
         
         .profile-section {
@@ -99,7 +97,7 @@
             fill: currentColor;
         }
         
-        /* Unified list styles: numbered and unnumbered */
+        /* List styles */
         .list {
             list-style: none;
             padding-left: 0;
@@ -107,55 +105,26 @@
         }
         .list .list-item {
             margin-bottom: 14px;
-        }
-        .list:not(.list--numbered) .list-item {
             padding: 2px 0 2px 20px;
             position: relative;
         }
-        .list:not(.list--numbered) .list-item::before {
+        .list .list-item::before {
             content: "•";
             position: absolute;
             left: 0;
             color: #666;
         }
-        .list--numbered {
-            list-style: decimal;
-            padding-left: 24px;
-        }
-        .list--numbered .list-item {
-            margin-bottom: 16px;
-            padding-left: 0;
-            position: static;
-        }
-        .list--numbered .list-item::before {
-            content: none;
-        }
         .item-title a {
-            color: #000;
-            text-decoration: none;
             font-weight: 500;
             transition: color 0.2s ease;
         }
-        .item-title a:hover {
-            color: #333;
-            text-decoration: underline;
-        }
         .item-meta {
             color: #777;
-            font-size: 0.9em;
             margin: 4px 0 2px;
         }
         .item-venue {
             color: #444;
-            font-size: 0.95em;
             font-style: italic;
-        }
-        .item-venue a {
-            color: #444;
-            text-decoration: none;
-        }
-        .item-venue a:hover {
-            text-decoration: underline;
         }
         .list a {
             color: #333;
@@ -168,6 +137,32 @@
             font-weight: 500;
             color: #000;
             margin-right: 5px;
+        }
+
+        #research > span {
+            color: #999;
+            font-size: 1rem;
+            white-space: nowrap;
+        }
+        #research button {
+            border: 0;
+            background: transparent;
+            color: inherit;
+            font: inherit;
+            cursor: pointer;
+        }
+        #research button:hover,
+        #research button.active {
+            color: #000;
+        }
+        #research-list .list-item {
+            padding-left: 0;
+        }
+        #research-list .list-item::before {
+            content: none;
+        }
+        #research-list:not(.show-all) .list-item:not(.selected) {
+            display: none;
         }
         
         @media (max-width: 768px) {
@@ -237,8 +232,15 @@
             </div>
         </div>
         
-        <h2 id="research">Research Works</h2>
-        <ol class="list list--numbered" reversed>
+        <h2 id="research">
+            Research Works
+            <span>
+                <button type="button" id="selected-works" class="active" onclick="showResearchWorks(false)">Selected</button> /
+                <button type="button" id="all-works" onclick="showResearchWorks(true)">All</button>
+            </span>
+        </h2>
+        <ul class="list" id="research-list">
+            <!--
             <li class="list-item">
                 <div class="item-title">
                     Turán-type problems over finite fields
@@ -246,13 +248,48 @@
                 <div class="item-meta">Ping Hu, Bernard Lidický, Jiayi Lu, <u>Zeyu Zheng</u></div>
                 <div class="item-venue">Manuscript</div>
             </li>
+            -->
+
+            <li class="list-item selected">
+                <div class="item-title">
+                    Seed Foundation Models
+                    (<a href="https://seed.bytedance.com/en/seed2" target="_blank">Seed2.0</a>,
+                    <a href="https://seed.bytedance.com/en/seed2_1" target="_blank">Seed2.1</a>)
+                </div>
+                <div class="item-meta">ByteDance Seed</div>
+                <div class="item-venue">Technical Report</div>
+            </li>
+
+            <li class="list-item">
+                <div class="item-title">
+                    <a href="https://arxiv.org/abs/2605.15721" target="_blank">Contexting as Recommendation: Evolutionary Collaborative Filtering for Context Engineering</a>
+                </div>
+                <div class="item-meta">Jiachen Zhu, Zhuoying Ou, Congmin Zheng, Yuxiang Chen, <u>Zeyu Zheng</u>, Rong Shan, Lingyu Yang, Lionel Z. Wang, Weiwen Liu, Yong Yu, Weinan Zhang, Jianghao Lin</div>
+                <div class="item-venue">Preprint</div>
+            </li>
+
+            <li class="list-item">
+                <div class="item-title">
+                    <a href="https://arxiv.org/abs/2605.09915" target="_blank">Academic Conferences are Potentially Facing Denominator Gaming Caused by Fully Automated Scientific Agents</a>
+                </div>
+                <div class="item-meta">Rong Shan, Te Gao, Hang Zheng, Yunjia Xi, Jiachen Zhu, <u>Zeyu Zheng</u>, Yong Yu, Weinan Zhang, Jianghao Lin</div>
+                <div class="item-venue">ICML 2026</div>
+            </li>
 
             <li class="list-item">
                 <div class="item-title">
                     <a href="https://arxiv.org/abs/2604.16625" target="_blank">AdaExplore: Failure-Driven Adaptation and Diversity-Preserving Search for Efficient Kernel Generation</a>
                 </div>
                 <div class="item-meta">Weihua Du, Jingming Zhuo, Yixin Dong, Andre Wang He, Weiwei Sun, <u>Zeyu Zheng</u>, Manupa Karunaratne, Ivan Fox, Tim Dettmers, Tianqi Chen, Yiming Yang, Sean Welleck</div>
-                <div class="item-venue">Under review</div>
+                <div class="item-venue">COLM 2026</div>
+            </li>
+
+            <li class="list-item">
+                <div class="item-title">
+                    <a href="https://arxiv.org/abs/2604.09574" target="_blank">Turing Test on Screen: A Benchmark for Mobile GUI Agent Humanization</a>
+                </div>
+                <div class="item-meta">Jiachen Zhu, Lingyu Yang, Rong Shan, Congmin Zheng, <u>Zeyu Zheng</u>, Weiwen Liu, Yong Yu, Weinan Zhang, Jianghao Lin</div>
+                <div class="item-venue">KDD 2026</div>
             </li>
 
             <li class="list-item">
@@ -263,23 +300,7 @@
                 <div class="item-venue">Under review</div>
             </li>
 
-            <li class="list-item">
-                <div class="item-title">
-                    <a href="https://seed.bytedance.com/en/seed2" target="_blank">Seed2.0: Towards Intelligence Frontier for Real-World Complexity</a>
-                </div>
-                <div class="item-meta">ByteDance Seed</div>
-                <div class="item-venue">Technical Report</div>
-            </li>
-
-            <li class="list-item">
-                <div class="item-title">
-                    <a href="https://arxiv.org/abs/2604.09574" target="_blank">Turing Test on Screen: A Benchmark for Mobile GUI Agent Humanization</a>
-                </div>
-                <div class="item-meta">Jiachen Zhu, Lingyu Yang, Rong Shan, Congmin Zheng, <u>Zeyu Zheng</u>, Weiwen Liu, Yong Yu, Weinan Zhang, Jianghao Lin</div>
-                <div class="item-venue">Under review</div>
-            </li>
-
-            <li class="list-item">
+            <li class="list-item selected">
                 <div class="item-title">
                     <a href="https://seed.bytedance.com/en/blog/seed-prover-1-5-advanced-mathematical-reasoning-through-a-novel-agentic-architecture?view_from=content_recommend" target="_blank">Seed-Prover 1.5: Mastering Undergraduate-Level Theorem Proving via Learning from Experience</a>
                 </div>
@@ -289,13 +310,21 @@
 
             <li class="list-item">
                 <div class="item-title">
+                    <a href="https://www.arxiv.org/abs/2510.08049" target="_blank">A Survey of Process Reward Models: From Outcome Signals to Process Supervisions for Large Language Models</a>
+                </div>
+                <div class="item-meta">Congming Zheng<sup>*</sup>, Jiachen Zhu<sup>*</sup>, Zhuoying Ou<sup>*</sup>, Yuxiang Chen, Kangning Zhang, Rong Shan, <u>Zeyu Zheng</u>, Mengyue Yang, Jianghao Lin, Yong Yu, Weinan Zhang</div>
+                <div class="item-venue">ACL 2026</div>
+            </li>
+
+            <li class="list-item selected">
+                <div class="item-title">
                     <a href="https://arxiv.org/abs/2509.00586" target="_blank">The Oddtown problem modulo a composite number</a>
                 </div>
                 <div class="item-meta">Boris Bukh, Ting-Wei Chao, <u>Zeyu Zheng</u></div>
                 <div class="item-venue">Under review</div>
             </li>
 
-            <li class="list-item">
+            <li class="list-item selected">
                 <div class="item-title">
                     <a href="https://bfs-prover.github.io/V2/" target="_blank">BFS-Prover-V2: Scaling up Multi-Turn Off-Policy RL and Multi-Agent Tree Search for LLM Step-Provers</a>
                 </div>
@@ -303,23 +332,7 @@
                 <div class="item-venue">ICML 2026</div>
             </li>
 
-            <li class="list-item">
-                <div class="item-title">
-                    <a>Academic Conferences are Potentially Facing Denominator Gaming Caused by Fully Automated Scientific Agents</a>
-                </div>
-                <div class="item-meta">Rong Shan, Te Gao, Hang Zheng, Yunjia Xi, Jiachen Zhu, <u>Zeyu Zheng</u>, Yong Yu, Weinan Zhang, Jianghao Lin</div>
-                <div class="item-venue">ICML 2026</div>
-            </li>
-
-            <li class="list-item">
-                <div class="item-title">
-                    <a href="https://www.arxiv.org/abs/2510.08049" target="_blank">A Survey of Process Reward Models: From Outcome Signals to Process Supervisions for Large Language Models</a>
-                </div>
-                <div class="item-meta">Congming Zheng<sup>*</sup>, Jiachen Zhu<sup>*</sup>, Zhuoying Ou<sup>*</sup>, Yuxiang Chen, Kangning Zhang, Rong Shan, <u>Zeyu Zheng</u>, Mengyue Yang, Jianghao Lin, Yong Yu, Weinan Zhang</div>
-                <div class="item-venue">ACL 2026</div>
-            </li>
-            
-            <li class="list-item">
+            <li class="list-item selected">
                 <div class="item-title">
                     <a href="https://arxiv.org/abs/2505.07706" target="_blank">The generalized trifference problem</a>
                 </div>
@@ -371,7 +384,7 @@
                 </div>
             </li>
             
-            <li class="list-item">
+            <li class="list-item selected">
                 <div class="item-title">
                     <a href="https://arxiv.org/abs/2109.10520" target="_blank">On the Turán number of the linear $3$-graph $C_{13}$</a>
                 </div>
@@ -380,7 +393,7 @@
                     <a href="https://www.combinatorics.org/ojs/index.php/eljc/article/view/v29i3p46" target="_blank">The Electronic Journal of Combinatorics (2022), P3–46.</a>
                 </div>
             </li>
-        </ol>
+        </ul>
         
         <h2 id="teaching">Teaching</h2>
         <ul class="list">
@@ -399,5 +412,12 @@
             <li class="list-item"><strong>MC:</strong> I work as a Master of Ceremonies. I was a member of Fudan Host Team. I hosted RU Voice 2022 and CMU CSSA The Voice 2024.</li>
         </ul>
     </div>
+    <script>
+        function showResearchWorks(showAll) {
+            document.getElementById('research-list').classList.toggle('show-all', showAll);
+            document.getElementById('selected-works').classList.toggle('active', !showAll);
+            document.getElementById('all-works').classList.toggle('active', showAll);
+        }
+    </script>
 </body>
 </html>
