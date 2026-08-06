@@ -35,14 +35,17 @@
         .quote-text {
             font-style: italic;
             font-size: 1.25rem;
-            color: #555;
+            font-weight: 400;
+            color: #888;
             text-align: center;
             margin-bottom: 8px;
         }
         
         .quote-author {
             text-align: right;
-            color: #777;
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: #888;
         }
         
         .profile-section {
@@ -84,12 +87,12 @@
         }
         
         .social-links a {
-            color: #444;
+            color: #000;
             transition: color 0.2s ease;
         }
         
         .social-links a:hover {
-            color: #000;
+            color: #444;
         }
         
         .social-links svg {
@@ -113,26 +116,32 @@
             content: "•";
             position: absolute;
             left: 0;
-            color: #666;
+            color: #000;
         }
         .item-title a {
             font-weight: 500;
             transition: color 0.2s ease;
         }
         .item-meta {
-            color: #777;
+            color: #888;
             margin: 4px 0 2px;
         }
         .item-venue {
             color: #444;
             font-style: italic;
         }
+        .item-venue a {
+            color: inherit;
+        }
+        .item-venue a:hover {
+            color: #888;
+        }
         .list a {
-            color: #333;
+            color: #000;
             text-decoration: underline;
         }
         .list a:hover {
-            color: #000;
+            color: #444;
         }
         .list strong {
             font-weight: 500;
@@ -141,7 +150,7 @@
         }
 
         #research > span {
-            color: #999;
+            color: #888;
             font-size: 1rem;
             white-space: nowrap;
         }
@@ -153,6 +162,9 @@
             cursor: pointer;
         }
         #research button:hover,
+        #research button:hover {
+            color: #444;
+        }
         #research button.active {
             color: #000;
         }
