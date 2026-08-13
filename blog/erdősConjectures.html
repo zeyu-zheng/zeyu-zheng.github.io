@@ -21,7 +21,7 @@
     <script src="../common.js"></script>
     
     <div class="blog-header"><div class="blog-header-inner">
-        <a href="../blog.html">Zeyu Zheng's Blog</a>
+        <strong><a href="../blog.html">Zeyu Zheng's Blog</a></strong>
         <span class="post-date">January 5, 2026</span>
     </div></div>
 
@@ -62,11 +62,11 @@
                 Define
                 $B_2(n) = \prod_{p^\alpha \,\Vert\, n,\, \alpha\ge 2} p^\alpha$,
                 i.e., take the prime factorization of $n$ and delete the prime factors that occur only to the first power; multiply what remains.
-                Erdős and Graham suggested in <a href="#ref1">[1, pp. 68–69]</a> that one can <b>perhaps</b> show
+                Erdős and Graham suggested in <a href="#ref1">[1, pp. 68–69]</a> that one can perhaps show
                 $$\prod_{m< n \le m+k} B_2(n) < c_k m^2,$$
                 but they could not even rule out a very extreme scenario where there are infinitely many $m$ such that
                 $$\prod_{m< n \le m+k} B_2(n) = c_k \prod_{i=1}^k (m+i-1).$$
-                They further believed the following is <b>very likely</b> true: for every $k$ and every $\varepsilon>0$,
+                They further believed the following is very likely true: for every $k$ and every $\varepsilon>0$,
                 $$\prod_{m< n \le m+k} B_2(n) < m^{2+\varepsilon}.$$
             </p>
             <h4>The Progress</h4>
@@ -91,8 +91,8 @@
                 However, in a later single-author paper by Erdős, <a href="#ref3">[3, p. 156]</a>, the problem is restated in terms of a set $S(d)$. 
                 The way it is quoted there (see the screenshot below) suppresses indices and, at least in the brief restatement, does not explicitly include the necessary coprimality condition.
             </p>
-            <div style="text-align: center; margin: 0px 0;">
-                <img src="erdősConjectures1.png" alt="Erdős paper excerpt" style="max-width: 100%; ">
+            <div class="centered-image">
+                <img src="erdősConjectures1.png" alt="Erdős paper excerpt">
             </div>
             <p> 
                 As a result, it is not completely clear from the restatement whether $S(d)$ should correspond to $P(d,0)$ or $P(d,1)$. Given that the original conjecture in <a href="#ref2">[2]</a> explicitly assumes $k\ge 1$ and <a href="#ref3">[3]</a> cites it, I personally suspect that Erdős intended $S(d)=P(d,1)$ (so the later paper is the $k=1$ special case).

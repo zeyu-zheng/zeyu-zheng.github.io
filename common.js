@@ -81,6 +81,7 @@
         
         const links = [
             { text: 'About', href: isIndex ? '#about' : basePath + 'index.html#about', onclick: isIndex ? 'closeMenu()' : '' },
+            { text: 'News', href: isIndex ? '#news' : basePath + 'index.html#news', onclick: isIndex ? 'closeMenu()' : '' },
             { text: 'Blog', href: isBlog ? 'blog.html' : basePath + 'blog.html', onclick: '' },
             { text: 'Research', href: isIndex ? '#research' : basePath + 'index.html#research', onclick: isIndex ? 'closeMenu()' : '' },
             { text: 'Misc', href: isIndex ? '#miscellaneous' : basePath + 'index.html#miscellaneous', onclick: isIndex ? 'closeMenu()' : '' }

@@ -35,8 +35,7 @@
         .quote-text {
             font-style: italic;
             font-size: 1.5rem;
-            font-weight: 400;
-            color: #888;
+            color: var(--color-text-muted);
             text-align: center;
             margin-bottom: 8px;
         }
@@ -44,8 +43,7 @@
         .quote-author {
             text-align: right;
             font-size: 1.25rem;
-            font-weight: 400;
-            color: #888;
+            color: var(--color-text-muted);
         }
         
         .profile-section {
@@ -75,18 +73,17 @@
         }
         
         .bio-text p {
-            margin-bottom: 12px;
-            line-height: 1.7;
+            margin-bottom: 16px;
             text-align: justify;
         }
 
         .bio-text a {
-            color: #000;
+            color: var(--color-text);
             text-decoration: underline;
         }
 
         .bio-text a:hover {
-            color: #444;
+            color: var(--color-text-secondary);
         }
         
         .social-links {
@@ -96,12 +93,12 @@
         }
         
         .social-links a {
-            color: #000;
+            color: var(--color-text);
             transition: color 0.2s ease;
         }
         
         .social-links a:hover {
-            color: #444;
+            color: var(--color-text-secondary);
         }
         
         .social-links svg {
@@ -117,7 +114,7 @@
             margin-left: 0;
         }
         .list .list-item {
-            margin-bottom: 14px;
+            margin-bottom: 16px;
             padding: 2px 0 2px 20px;
             position: relative;
         }
@@ -125,41 +122,50 @@
             content: "•";
             position: absolute;
             left: 0;
-            color: #000;
+            color: var(--color-text);
         }
         .item-title a {
-            font-weight: 500;
             transition: color 0.2s ease;
         }
         .item-meta {
-            color: #888;
+            color: var(--color-text-muted);
             margin: 4px 0 2px;
         }
         .item-venue {
-            color: #444;
+            color: var(--color-text-secondary);
             font-style: italic;
         }
         .item-venue a {
             color: inherit;
         }
         .item-venue a:hover {
-            color: #888;
+            color: var(--color-text-muted);
         }
         .list a {
-            color: #000;
+            color: var(--color-text);
             text-decoration: underline;
         }
         .list a:hover {
-            color: #444;
+            color: var(--color-text-secondary);
         }
-        .list strong {
-            font-weight: 500;
-            color: #000;
-            margin-right: 5px;
+        #news-list .news-item {
+            display: grid;
+            grid-template-columns: 4.5rem 1rem minmax(0, 1fr);
+            column-gap: 1rem;
+            align-items: baseline;
+        }
+        #news-list .news-date {
+            white-space: nowrap;
+        }
+        #news-list .news-separator {
+            text-align: center;
+        }
+        #news-list .news-content {
+            min-width: 0;
         }
 
-        #research > span {
-            color: #888;
+        #research .research-toggle {
+            color: var(--color-text-muted);
             font-size: 1rem;
             white-space: nowrap;
         }
@@ -170,12 +176,11 @@
             font: inherit;
             cursor: pointer;
         }
-        #research button:hover,
         #research button:hover {
-            color: #444;
+            color: var(--color-text-secondary);
         }
         #research button.active {
-            color: #000;
+            color: var(--color-text);
         }
         #research-list .list-item {
             padding-left: 0;
@@ -253,13 +258,27 @@
             </div>
         </div>
         
-        <h2 id="research">
-            Research Works
-            <span>
+        <h2 id="news">News</h2>
+        <ul class="list" id="news-list">
+            <li class="list-item news-item">
+                <span class="news-date">Aug 2026</span>
+                <span class="news-separator">—</span>
+                <span class="news-content">Our updated <a href="https://arxiv.org/abs/2509.00586" target="_blank">Oddtown paper</a> resolves a long-standing question of Babai and Frankl.</span>
+            </li>
+            <li class="list-item news-item">
+                <span class="news-date">Jun 2026</span>
+                <span class="news-separator">—</span>
+                <span class="news-content">New blog post: <a href="blog/sustainTheClimb.html">Sustain the climb</a> — why long RL runs collapse and how soft resets help.</span>
+            </li>
+        </ul>
+
+        <div id="research" class="section-heading">
+            <h2>Research Works</h2>
+            <div class="research-toggle">
                 <button type="button" id="selected-works" class="active" onclick="showResearchWorks(false)">Selected</button> /
                 <button type="button" id="all-works" onclick="showResearchWorks(true)">All</button>
-            </span>
-        </h2>
+            </div>
+        </div>
         <ul class="list" id="research-list">
             <!--
             <li class="list-item">
@@ -418,10 +437,9 @@
         
         <h2 id="miscellaneous">Miscellaneous</h2>
         <ul class="list">
-            <li class="list-item"><strong>Bartending:</strong> My favorite cocktails are Baileys Milkshake, Gin Tonic and Pina Colada.</li>
-            <li class="list-item"><strong>Basketball:</strong> I was on the school basketball team during middle school and high school. Our 1908 class team won the second place in 2018 Shanghai High School SBS. Our high school team won the first prize in Xuhui District in 2018 High School Basketball League Shanghai. My favorite basketball players are Kobe Bryant and Manu Ginóbili.</li>
-            <li class="list-item"><strong>Cooking:</strong> Let him cook!</li>
-            <li class="list-item"><strong>MC:</strong> I work as a Master of Ceremonies. I was a member of Fudan Host Team. I hosted RU Voice 2022 and CMU CSSA The Voice 2024.</li>
+            <li class="list-item">Bartending: My favorite cocktails are Baileys Milkshake, Gin Tonic and Pina Colada.</li>
+            <li class="list-item">Basketball: I was on the school basketball team during middle school and high school. Our 1908 class team won the second place in 2018 Shanghai High School SBS. Our high school team won the first prize in Xuhui District in 2018 High School Basketball League Shanghai. My favorite basketball players are Kobe Bryant and Manu Ginóbili.</li>
+            <li class="list-item">MC: I work as a Master of Ceremonies. I was a member of Fudan Host Team. I hosted RU Voice 2022 and CMU CSSA The Voice 2024.</li>
         </ul>
     </div>
     <script>

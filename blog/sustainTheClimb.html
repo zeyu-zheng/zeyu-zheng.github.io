@@ -40,7 +40,7 @@
         }
         .figure-caption {
             margin: 0;
-            color: #888;
+            color: var(--color-text-muted);
             font-size: 0.75rem;
         }
     </style>
@@ -50,7 +50,7 @@
     <script src="../common.js"></script>
 
     <div class="blog-header"><div class="blog-header-inner">
-        <a href="../blog.html">Zeyu Zheng's Blog</a>
+        <strong><a href="../blog.html">Zeyu Zheng's Blog</a></strong>
         <span class="post-date">June 12, 2026</span>
     </div></div>
 
@@ -75,8 +75,8 @@
                     </div>
                 </div>
                 <div class="caption-row">
-                    <p class="figure-caption"><b>MAI-Thinking-1, Fig. 15</b> (Section 3.1.4). ⋆ = soft reset (self-distillation). Different colors = base upgrade (new pre/mid-trained model).</p>
-                    <p class="figure-caption"><b>BFS-Prover-V2, Fig. 4</b> (Section 2.2). "Retrain" = soft reset (periodic retraining). "Scale up" = base upgrade (larger model).</p>
+                    <p class="figure-caption">MAI-Thinking-1, Fig. 15 (Section 3.1.4). ⋆ = soft reset (self-distillation). Different colors = base upgrade (new pre/mid-trained model).</p>
+                    <p class="figure-caption">BFS-Prover-V2, Fig. 4 (Section 2.2). "Retrain" = soft reset (periodic retraining). "Scale up" = base upgrade (larger model).</p>
                 </div>
             </div>
 
@@ -103,7 +103,7 @@
                 But even with all of these, drift can still accumulate over long runs (<a href="#ref1">[1]</a>, Section 3.6.4). A soft reset addresses this by starting from a fresh checkpoint.
             </p>
             <p>
-                <b>Model merging</b> is another technique that can address this and is increasingly adopted by AI labs in their post-training pipelines. Different runs from the same base accumulate drift on different tokens, so averaging their parameters cancels out run-specific corruptions.
+                Model merging is another technique that can address this and is increasingly adopted by AI labs in their post-training pipelines. Different runs from the same base accumulate drift on different tokens, so averaging their parameters cancels out run-specific corruptions.
             </p>
 
             <h2>Beyond numerical precision</h2>
@@ -124,9 +124,9 @@
                 What data should the resetting SFT train on? Both MAI and BFS-Prover-V2 converge on three principles.
             </p>
             <ul>
-                <li><b>Data freshness.</b> After a long training run, much of the accumulated data was generated when the model was still weak. These early traces contain reasoning patterns the model has since outgrown, and training on them re-introduces suboptimal behaviors. MAI (Section 3.1.4) reports that self-distillation should use traces from later checkpoints, and that sampling from multiple strong checkpoints outperforms single-checkpoint sampling. In BFS-Prover-V2, the re-synthesis step achieves this by re-running the strongest model on the entire prompt set, replacing all historical trajectories with shorter, cleaner ones.</li>
-                <li><b>Frontier-adaptive filtering.</b> Not all data from the current policy is equally useful. Problems the model already solves consistently provide no learning signal. Problems with very low success rates may have faulty ground truth, or simply yield too little gradient to be useful. MAI implements this at the problem level with a two-stage pass-rate filter (Stage 1 uses $G_{\text{early}}=16$ samples with $\rho \in [0.05, 0.8]$, Stage 2 uses the full $G=128$ with $\rho \in [0.1, 0.8]$). BFS-Prover-V2 implements this at the tactic level by filtering on perplexity: trivially easy tactics (low perplexity) and noisy tactics (high perplexity) are both discarded.</li>
-                <li><b>Diversity over volume.</b> MAI reports that for a fixed token budget, prompt diversity is more valuable than trace diversity per prompt. We also had similar observations when blending RFT data in BFS-Prover-V2.</li>
+                <li>Data freshness. After a long training run, much of the accumulated data was generated when the model was still weak. These early traces contain reasoning patterns the model has since outgrown, and training on them re-introduces suboptimal behaviors. MAI (Section 3.1.4) reports that self-distillation should use traces from later checkpoints, and that sampling from multiple strong checkpoints outperforms single-checkpoint sampling. In BFS-Prover-V2, the re-synthesis step achieves this by re-running the strongest model on the entire prompt set, replacing all historical trajectories with shorter, cleaner ones.</li>
+                <li>Frontier-adaptive filtering. Not all data from the current policy is equally useful. Problems the model already solves consistently provide no learning signal. Problems with very low success rates may have faulty ground truth, or simply yield too little gradient to be useful. MAI implements this at the problem level with a two-stage pass-rate filter (Stage 1 uses $G_{\text{early}}=16$ samples with $\rho \in [0.05, 0.8]$, Stage 2 uses the full $G=128$ with $\rho \in [0.1, 0.8]$). BFS-Prover-V2 implements this at the tactic level by filtering on perplexity: trivially easy tactics (low perplexity) and noisy tactics (high perplexity) are both discarded.</li>
+                <li>Diversity over volume. MAI reports that for a fixed token budget, prompt diversity is more valuable than trace diversity per prompt. We also had similar observations when blending RFT data in BFS-Prover-V2.</li>
             </ul>
 
             <div class="wide-figures">
@@ -139,8 +139,8 @@
                     </div>
                 </div>
                 <div class="caption-row">
-                    <p class="figure-caption"><b>MAI-Thinking-1</b> (Section 3.1.3). Two-stage problem sampling with pass-rate filter $\rho \in [0.05, 0.8]$ then $\rho \in [0.1, 0.8]$.</p>
-                    <p class="figure-caption"><b>BFS-Prover-V2, Fig. 2</b> (Section 2.2.1). Tactic-level perplexity filtering. Low and high tails filtered out.</p>
+                    <p class="figure-caption">MAI-Thinking-1 (Section 3.1.3). Two-stage problem sampling with pass-rate filter $\rho \in [0.05, 0.8]$ then $\rho \in [0.1, 0.8]$.</p>
+                    <p class="figure-caption">BFS-Prover-V2, Fig. 2 (Section 2.2.1). Tactic-level perplexity filtering. Low and high tails filtered out.</p>
                 </div>
             </div>
 
